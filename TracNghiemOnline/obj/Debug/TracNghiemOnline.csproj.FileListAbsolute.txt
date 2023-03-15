@@ -80,4 +80,3 @@ E:\(UP GIT) DoAn_TracNghiem\TracNghiemOnline\bin\EntityFramework.dll
 E:\(UP GIT) DoAn_TracNghiem\TracNghiemOnline\bin\EntityFramework.SqlServer.dll
 E:\(UP GIT) DoAn_TracNghiem\TracNghiemOnline\bin\EntityFramework.xml
 E:\(UP GIT) DoAn_TracNghiem\TracNghiemOnline\bin\EntityFramework.SqlServer.xml
-E:\(UP GIT) DoAn_TracNghiem\TracNghiemOnline\obj\Debug\TracNghiemOnline.csproj.AssemblyReference.cache
