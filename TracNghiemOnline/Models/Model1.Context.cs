@@ -13,10 +13,10 @@ namespace TracNghiemOnline.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class trac_nghiem_onlineEntities : DbContext
+    public partial class tracnghiemEntities : DbContext
     {
-        public trac_nghiem_onlineEntities()
-            : base("name=trac_nghiem_onlineEntities")
+        public tracnghiemEntities()
+            : base("name=tracnghiemEntities")
         {
         }
     
@@ -37,7 +37,6 @@ namespace TracNghiemOnline.Models
         public virtual DbSet<student_test_detail> student_test_detail { get; set; }
         public virtual DbSet<student> students { get; set; }
         public virtual DbSet<subject> subjects { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<teacher> teachers { get; set; }
         public virtual DbSet<test> tests { get; set; }
     }
