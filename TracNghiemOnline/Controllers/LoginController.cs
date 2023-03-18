@@ -17,7 +17,8 @@ namespace TracNghiemOnline.Controllers
             if (Session[UserSession.ISLOGIN] != null && (bool)Session[UserSession.ISLOGIN])
             {
                 if ((int)Session[UserSession.PERMISSION] == 1)
-                    return RedirectToAction("Index", "Admin");
+                    //return RedirectToAction("Index", "Admin");
+                    return RedirectToAction("About", "Home");
                 if ((int)Session[UserSession.PERMISSION] == 2)
                     return RedirectToAction("Index", "Teacher");
                 if ((int)Session[UserSession.PERMISSION] == 3)
@@ -34,7 +35,7 @@ namespace TracNghiemOnline.Controllers
                 {
                     user = new User();
                     if (user.IsAdmin())
-                        return RedirectToAction("Index", "Admin");
+                        return RedirectToAction("About", "Home");
                     if (user.IsTeacher())
                         return RedirectToAction("Index", "Teacher");
                     if (user.IsStudent())
@@ -47,5 +48,6 @@ namespace TracNghiemOnline.Controllers
                 ViewBag.error = "Có lỗi xảy ra trong quá trình xử lý, vui lòng thử lại sau.";
             return View();
         }
+        
     }
 }
