@@ -1,6 +1,5 @@
 ﻿@using TracNghiemOnline.Common
-@{ ViewBag.copyright = "Copyright 2023 by Bùi Thị Hải";
-                ViewBag.name = "Hệ Thống Trắc Nghiệm Online"; }
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,39 +9,149 @@
     <title>
         @ViewBag.Title
     </title>
-    <link rel="stylesheet" href="~/Assets/css/normalize.css">
-    <link rel="stylesheet" href="~/Assets/css/style.min.css">
-    <link rel="stylesheet" href="~/Assets/css/font-awesome.css">
-    <link rel="stylesheet" href="~/Assets/css/materialize.min.css">
+    
+    @* Landing Page *@
+    <link href="Assets/LandingPage/img/favicon.ico" rel="icon" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/flaticon/font/flaticon.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/css/style.css" rel="stylesheet" />
+
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Assets/js/materialize.min.js"></script>
 </head>
 
 <body class="body-login scrollbar">
     <div class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper nav-green">
-                <a href="/" class="brand-logo cursor left"><i class="material-icons">home</i></a>
-                <div class="right">
-                    <span class="title">Xin chào: @Session[UserSession.NAME]</span>
-                    @Html.ActionLink("Đăng xuất", "Logout")
+
+        <!-- Navbar Start -->
+        <div class="container-fluid bg-light position-relative shadow">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0 px-lg-5">
+                <a href="/Home/Index" class="navbar-brand font-weight-bold text-secondary" style="font-size: 50px">
+                    <i class="flaticon-043-teddy-bear"></i>
+                </a>
+                <div class="collapse navbar-collapse justify-content-between"
+                     id="navbarCollapse">
+                    <div class="navbar-nav font-weight-bold mx-auto py-0">
+                        <a href="/Home/Index" class="nav-item nav-link active"> Trang chủ</a>
+                        <a href="/Home/About" class="nav-item nav-link"> Thông tin </a>
+                        <a href="#" class="nav-item nav-link"> Lớp học </a>
+                        <a href="#" class="nav-item nav-link"> Giáo viên </a>
+                        <a href="/Home/About" class="nav-item nav-link"> Liên hệ </a>
+                    </div>
                 </div>
-            </div>
-        </nav>
+                <div class="navbar-nav">
+                    @{ if (@Session[UserSession.NAME] == null)
+                        { <a href="/Login/Index" class="btn btn-primary px-4"> Đăng nhập ! </a> }
+
+                        else
+                        {
+            <span class="title" style="color: black; margin-top: 11%">Xin chào: @Session[UserSession.NAME] </span>
+                            <br />
+                                            <a href="/Login/Logout" class="btn btn-primary" style="margin:50px"> Đăng Xuất </a> } }
+                </div>
+
+
+            </nav>
+        </div>
+        <!-- Navbar End -->
+
+
     </div>
 
     @RenderBody()
 
-    <div class="col l12 footer" id="footer">
-        <div class="row reset-margin">
-            <div class="col l6 s6">
-                <i id="website-copyright">@ViewBag.copyright</i>
+    <!-- Footer Start -->
+    <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5">
+        <div class="row pt-5">
+            <div class="col-lg-3 col-md-6 mb-5">
+                <a href=""
+                   class="navbar-brand font-weight-bold text-primary m-0 mb-4 p-0"
+                   style="font-size: 40px; line-height: 40px">
+                    <i class="flaticon-043-teddy-bear"></i>
+                    <span class="text-white">KidKinder</span>
+                </a>
+                <p>
+                    Labore dolor amet ipsum ea, erat sit ipsum duo eos. Volup amet ea
+                    dolor et magna dolor, elitr rebum duo est sed diam elitr. Stet elitr
+                    stet diam duo eos rebum ipsum diam ipsum elitr.
+                </p>
+                <div class="d-flex justify-content-start mt-4">
+                    <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                       style="width: 38px; height: 38px"
+                       href="#">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                       style="width: 38px; height: 38px"
+                       href="#">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                       style="width: 38px; height: 38px"
+                       href="#">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="btn btn-outline-primary rounded-circle text-center mr-2 px-0"
+                       style="width: 38px; height: 38px"
+                       href="#">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
             </div>
-            <div class="col l6 s6 right-align">
-                <i id="website-title">@ViewBag.name</i>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h3 class="text-primary mb-4"> Thông tin </h3>
+                <div class="d-flex">
+                    <h4 class="fa fa-map-marker-alt text-primary"></h4>
+                    <div class="pl-3">
+                        <h5 class="text-white">Địa chỉ</h5>
+                        <p>Số 298 Đ. Cầu Diễn, Minh Khai, Bắc Từ Liêm, Hà Nội</p>
+                    </div>
+                </div>
+
+                <div class="d-flex">
+                    <h4 class="fa fa-phone-alt text-primary"></h4>
+                    <div class="pl-3">
+                        <h5 class="text-white">Phone</h5>
+                        <p> 024 3765 5121 </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h3 class="text-primary mb-4">Truy cập nhanh</h3>
+                <div class="d-flex flex-column justify-content-start">
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Classes</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Teachers</a>
+                    <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Blog</a>
+                    <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-5">
+                <h3 class="text-primary mb-4"> Địa chỉ </h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.4737883168477!2d105.73291811513005!3d21.053730985984906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345457e292d5bf%3A0x20ac91c94d74439a!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBIw6AgTuG7mWk!5e0!3m2!1svi!2s!4v1679141416893!5m2!1svi!2s"
+                        width="350" height="180" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
+        <div class="container-fluid pt-5"
+             style="border-top: 1px solid rgba(23, 162, 184, 0.2) ;">
+            <p class="m-0 text-center text-white">
+                &copy;
+                <a class="text-primary font-weight-bold" href="#"> Hệ Thống Thi Trực Tuyến </a>.
+                Using ASP.NET - SQL Server
+            </p>
+        </div>
     </div>
+    <!-- Footer End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top">
+        <i class="fa fa-angle-double-up" style="margin-top: -20px"></i>
+    </a>
+
 </body>
 
 </html>

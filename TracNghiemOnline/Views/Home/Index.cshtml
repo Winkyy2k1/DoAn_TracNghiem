@@ -1,31 +1,321 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title> Trang chủ - Hệ thống trắc nghiệm Online </title>
+    <!-- Favicon -->
+    <link href="~/Assets/LandingPage/img/favicon.ico" rel="icon" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/flaticon/font/flaticon.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/css/style.css" rel="stylesheet" />
+</head>
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<body>
+   
+    <!-- Header Start -->
+    <div class="container-fluid bg-primary px-0 px-md-5 mb-5">
+        <div class="row align-items-center px-3">
+            <div class="col-lg-6 text-center text-lg-left">
+                <h4 class="text-white mb-4 mt-5 mt-lg-0"> Bùi Thị Hải - IT5 </h4>
+                <h1 class="display-3 font-weight-bold text-white">
+                   Hệ thống thi trắc nghiệm trực tuyến
+                </h1>
+                <p class="text-white mb-4">
+                    Tổng hợp đề thi trắc nghiệm online trực tuyến.
+                    <br />
+                    Ngân hàng câu hỏi đầy đủ các môn học theo cấu hình giúp ôn luyện các bài thi một cách nhanh chóng, đơn giản.
+                </p>
+                <a href="" class="btn btn-secondary px-5"> Tìm hiểu thêm </a>
+            </div>
+            <div class="col-lg-6 text-center text-lg-right">
+                <img class="img-fluid mt-5" src="~/Assets/LandingPage/img/header.png" alt="" />
+            </div>
+        </div>
+    </div>
+    <!-- Header End -->
+    <!-- Facilities Start -->
+    <div class="container-fluid pt-5">
+        <div class="container pb-3">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4"
+                         style="padding: 30px">
+                        <i class="flaticon-050-fence h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>Đề Thi Đa Dạng</h4>
+                            <p class="m-0">
+                                Tổng hợp đề thi theo nhiều môn học đa dạng
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4"
+                         style="padding: 30px">
+                        <i class="flaticon-022-drum h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>Thi Học Kỳ</h4>
+                            <p class="m-0">
+                                Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
+                                lorem amet elitr vero...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4"
+                         style="padding: 30px">
+                        <i class="flaticon-030-crayons h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4> Ôn Tập Tại Nhà </h4>
+                            <p class="m-0">
+                                Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
+                                lorem amet elitr vero...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4"
+                         style="padding: 30px">
+                        <i class="flaticon-017-toy-car h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>Tiện lợi </h4>
+                            <p class="m-0">
+                                Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
+                                lorem amet elitr vero...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4"
+                         style="padding: 30px">
+                        <i class="flaticon-025-sandwich h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4> An toàn </h4>
+                            <p class="m-0">
+                                Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
+                                lorem amet elitr vero...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pb-1">
+                    <div class="d-flex bg-light shadow-sm border-top rounded mb-4"
+                         style="padding: 30px">
+                        <i class="flaticon-047-backpack h1 font-weight-normal text-primary mb-3"></i>
+                        <div class="pl-4">
+                            <h4>Đơn giản</h4>
+                            <p class="m-0">
+                                Kasd labore kasd et dolor est rebum dolor ut, clita dolor vero
+                                lorem amet elitr vero...
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Facilities Start -->
+    <!-- About Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5">
+                    <img class="img-fluid rounded mb-5 mb-lg-0"
+                         src="~/Assets/LandingPage/img/about-1.jpg"
+                         alt="" />
+                </div>
+                <div class="col-lg-7">
+                    <p class="section-title pr-5">
+                        <span class="pr-2">Về Chúng Tôi</span>
+                    </p>
+                    <h1 class="mb-4">Thi Trắc Nghiệm Trực Tuyến</h1>
+                    <p>
+                        Trường Đại học Công nghiệp Hà Nội là một trường đại học công lập, đa cấp, đa nghề, định hướng thực hành trực thuộc Bộ Công thương.
+                        Trường được nâng cấp lên đại học năm 2005 trên cơ sở Trường Cao đẳng Công nghiệp Hà Nội
+                    </p>
+                    <div class="row pt-2 pb-4">
+                        <div class="col-6 col-md-4">
+                            <img class="img-fluid rounded" src="~/Assets/LandingPage/img/about-2.jpg" alt="" />
+                        </div>
+                        <div class="col-6 col-md-8">
+                            <ul class="list-inline m-0">
+                                <li class="py-2 border-top border-bottom">
+                                    <i class="fa fa-check text-primary mr-3"></i> Đề thi đa dạng
+                                </li>
+                                <li class="py-2 border-bottom">
+                                    <i class="fa fa-check text-primary mr-3"></i> Làm bài trực tuyến
+                                </li>
+                                <li class="py-2 border-bottom">
+                                    <i class="fa fa-check text-primary mr-3"></i> Dễ dàng sử dụng
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="" class="btn btn-primary mt-2 py-2 px-4"> Xem thêm </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- About End -->
+  
+    <!-- Registration Start -->
+    <div class="container-fluid py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 mb-5 mb-lg-0">
+                    <p class="section-title pr-5">
+                        <span class="pr-2"> Subscribe</span>
+                    </p>
+                    <h1 class="mb-4"> Đăng ký nhận thông báo </h1>
+                    <p>
+                        Hiện nay, Nhà trường có 2 cơ sở đào tạo ở Hà Nội và 1 cơ sở đào tạo ở Hà Nam với tổng diện tích gần 50 ha.
+                    </p>
+                    <ul class="list-inline m-0">
+                        <li class="py-2">
+                            <i class="fa fa-check text-success mr-3"></i>  Cơ sở 1: Phường Minh Khai, quận Bắc Từ Liêm, thành phố Hà Nội.
+                        </li>
+                        <li class="py-2">
+                            <i class="fa fa-check text-success mr-3"></i> Cơ sở 2: Phường Tây Tựu, quận Bắc Từ Liêm, thành phố Hà Nội.
+                        </li>
+                        <li class="py-2">
+                            <i class="fa fa-check text-success mr-3"></i> Cơ sở 3: Phường Lê Hồng Phong, Thành phố Phủ Lý, tỉnh Hà Nam.
+                        </li>
+                    </ul>
+                   
+                </div>
+                <div class="col-lg-5">
+                    <div class="card border-0">
+                        <div class="card-header bg-secondary text-center p-4">
+                            <h1 class="text-white m-0"> Subscribe Notifications </h1>
+                        </div>
+                        <div class="card-body rounded-bottom bg-primary p-5">
+                            <form>
+                                <div class="form-group" style="color:black">
+                                    <input type="email" class="form-control border" placeholder="  Địa chỉ Email"  required="required" />
+                                </div>
+                                <div>
+                                    <button class="btn btn-secondary btn-block border-0" type="submit">
+                                        Subscribe
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Registration End -->
+   
+    <!-- Testimonial Start -->
+    <div class="container-fluid py-5">
+        <div class="container p-0">
+            <div class="text-center pb-2">
+                <h1 class="mb-4">What Parents Say ? </h1>
+            </div>
+            <div class="owl-carousel testimonial-carousel">
+                <div class="testimonial-item px-3">
+                    <div class="bg-light shadow-sm rounded mb-4 p-4">
+                        <h3 class="fas fa-quote-left text-primary mr-3"></h3>
+                            Hệ thống rất đơn giản và dễ sử dụng. Tôi rất thích nó. 
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <img class="rounded-circle" src="~/Assets/LandingPage/img/testimonial-2.jpg" style="width: 70px; height: 70px" alt="Image" />
+                        <div class="pl-4">
+                            <h5>Parent Name</h5>
+                           
+                        </div>
+                    </div>
+                </div>
+             </div>  
+            
+        </div>
+    </div>
+    <!-- Testimonial End -->
+    <!-- Blog Start -->
+    <div class="container-fluid pt-5">
+        <div class="container">
+            <div class="text-center pb-2">
+                <p class="section-title px-5">
+                    <span class="px-2">Tin tức</span>
+                </p>
+                <h1 class="mb-4">Latest Blog</h1>
+            </div>
+            <div class="row pb-3">
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow-sm mb-2">
+                        <img class="card-img-top mb-2" src="img/blog-1.jpg" alt="" />
+                        <div class="card-body bg-light text-center p-4">
+                            <h4 class="">Đa dạng nội dung</h4>
+                            <div class="d-flex justify-content-center mb-3">
+                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin Hải </small>
+                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> CNTT5 </small>
+                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 65</small>
+                            </div>
+                            <p>
+                                Cung cấp đa dạng nội dung các câu hỏi trắc nghiệm thuộc nhiều lĩnh vực khác nhau
+                            </p>
+                            <a href="" class="btn btn-primary px-4 mx-auto my-2"> Đọc Thêm </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow-sm mb-2">
+                        <img class="card-img-top mb-2" src="img/blog-2.jpg" alt="" />
+                        <div class="card-body bg-light text-center p-4">
+                            <h4 class=""> Ma trận câu hỏi </h4>
+                            <div class="d-flex justify-content-center mb-3">
+                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin Hải </small>
+                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> CNTT5 </small>
+                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 25</small>
+                            </div>
+                            <p>
+                                Hệ thống sẽ dựa vào ma trận câu hỏi phong phú để tự tổng hợp thành đề trắc nghiệm
+                            </p>
+                            <a href="" class="btn btn-primary px-4 mx-auto my-2"> Đọc thêm </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <div class="card border-0 shadow-sm mb-2">
+                        <img class="card-img-top mb-2" src="img/blog-3.jpg" alt="" />
+                        <div class="card-body bg-light text-center p-4">
+                            <h4 class=""> Kết quả ngay </h4>
+                            <div class="d-flex justify-content-center mb-3">
+                                <small class="mr-3"><i class="fa fa-user text-primary"></i> Admin Hải </small>
+                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> CNTT5 </small>
+                                <small class="mr-3"><i class="fa fa-comments text-primary"></i> 15</small>
+                            </div>
+                            <p>
+                                Sau khi hoàn thành bài kiểm tra trắc nghiệm hệ thống sẽ thông báo số điểm đạt ngay.
+                            </p>
+                            <a href="" class="btn btn-primary px-4 mx-auto my-2"> Đọc thêm </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+   
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p> Hải check text 
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Assets/LandingPage/lib/easing/easing.min.js"></script>
+    <script src="~/Assets/LandingPage/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/Assets/LandingPage/lib/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Assets/LandingPage/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="~/Assets/LandingPage/mail/jqBootstrapValidation.min.js"></script>
+    <script src="~/Assets/LandingPage/mail/contact.js"></script>
+    <script src="~/Assets/LandingPage/js/main.js"></script>
+</body>
+</html>
