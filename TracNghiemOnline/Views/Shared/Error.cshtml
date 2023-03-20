@@ -1,8 +1,7 @@
-﻿
-@using TracNghiemOnline.Common
-@{ ViewBag.Title = " Có lỗi truy cập xảy ra ";
-                ViewBag.copyright = "Copyright 2023 by Bùi Thị Hải ";
-                ViewBag.name = "Hệ Thống Trắc Nghiệm Online"; }
+﻿@using TracNghiemOnline.Common
+@{ ViewBag.Title = "Lỗi truy cập";
+                ViewBag.copyright = "Copyright 2023 by Bùi Thị Hải";
+                ViewBag.name = "Hệ Thống Thi Trắc Nghiệm Online"; }
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,33 +17,51 @@
     <link rel="stylesheet" href="~/Assets/css/materialize.min.css">
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Assets/js/materialize.min.js"></script>
+
+    <style>
+        .col-middle {
+            vertical-align: middle;
+        }
+
+        .col-middle {
+            float: none;
+            margin: auto 0;
+            margin-left: 100px;
+            padding-left: 100px;
+        }
+
+        .robo_body {
+            animation: float 4s ease-in-out infinite;
+            z-index: 30;
+        }
+    </style>
+
 </head>
 
 <body class="body-login">
-    <div class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper nav-green">
-                <a href="/" class="brand-logo cursor left"><i class="material-icons">home</i></a>
-            </div>
-        </nav>
-    </div>
+
     <div class="title-content">
         <a href="#" class="title" onclick="window.history.back()">Quay Lại</a>
         <span class="title">@ViewBag.Title</span>
     </div>
-    <div class="content row col s12 reset-margin">
-        <span class="failed">Lỗi: Bạn không có quyền truy cập trang này</span>
-    </div>
-    <div class="col l12 footer" id="footer">
-        <div class="row reset-margin">
-            <div class="col l6 s6">
-                <i id="website-copyright">@ViewBag.copyright</i>
-            </div>
-            <div class="col l6 s6 right-align">
-                <i id="website-title">@ViewBag.name</i>
+
+    <div class="">
+        <div class="page-container page-container-responsive">
+            <div class="row space-top-8 space-8 row-table">
+                <div class="col-lg-5 text-right col-middle">
+                    <h3>THÔNG BÁO!</h3>
+                    <span class="failed">Lỗi: Bạn không có quyền truy cập trang này. Vui lòng kiểm tra lại. </span>
+                    <br />
+                    <a href="#" class="btn btn-danger" style="margin-top:20px" onclick="window.history.back()">Quay Lại</a>
+                </div>
+                <div class="col-lg-5 text-left robo_figure">
+                    <img class="robo_body" src="http://lms-school-node1-new-class.vnpt.edu.vn/maintenance_files/404_body.png" width="80%" alt="Girl has dropped her ice cream.">
+                </div>
             </div>
         </div>
     </div>
+
+
 </body>
 
 </html>
