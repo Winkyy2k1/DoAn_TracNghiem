@@ -29,7 +29,7 @@ namespace TracNghiemOnline.Common
                 EMAIL = (string)HttpContext.Current.Session[UserSession.EMAIL];
                 AVATAR = (string)HttpContext.Current.Session[UserSession.AVATAR];
                 NAME = (string)HttpContext.Current.Session[UserSession.NAME];
-                // TESTCODE = (int)HttpContext.Current.Session[UserSession.TESTCODE];   // comment de chay code - mo cmt sau
+                TESTCODE = (int)HttpContext.Current.Session[UserSession.TESTCODE];   // comment de chay code - mo cmt sau
                 TIME = (string)HttpContext.Current.Session[UserSession.TIME];
             }
             catch (Exception) { }

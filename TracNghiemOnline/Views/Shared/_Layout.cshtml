@@ -9,7 +9,7 @@
     <title>
         @ViewBag.Title
     </title>
-    
+
     @* Landing Page *@
     <link href="Assets/LandingPage/img/favicon.ico" rel="icon" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -49,15 +49,24 @@
 
                         else
                         {
-                             <span class="title" style="color: black; margin: 10px 30px">Xin chào: @Session[UserSession.NAME] </span>
-                             <a href="/Login/Logout" class="btn btn-primary"> Đăng Xuất </a> } }
+            <span class="title" style="color: black; margin: 10px 30px">Xin chào: @Session[UserSession.NAME] </span> {
+                                int role = (int)Session[UserSession.PERMISSION];
+                                if (role == 1)
+                                {<a href="/Admin/Logout" class="btn btn-primary"> Đăng Xuất </a>}
+                                else
+                                if (role == 2)
+                                {<a href="/Teacher/Logout" class="btn btn-primary"> Đăng Xuất </a>}
+                                else
+                                if (role == 3)
+                                {<a href="/Student/Logout" class="btn btn-primary"> Đăng Xuất </a>}
+                            }
+                        }
+                    }
                 </div>
-
 
             </nav>
         </div>
         <!-- Navbar End -->
-
 
     </div>
 
@@ -148,7 +157,7 @@
     <!-- Footer End -->
     <!-- Back to Top -->
     <a href="#" class="btn btn-primary p-3 back-to-top">
-        <i class="fa fa-angle-double-up" ></i>
+        <i class="fa fa-angle-double-up"></i>
     </a>
 
 </body>
