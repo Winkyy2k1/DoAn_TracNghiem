@@ -2314,6 +2314,9 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\AdminManager.cshtml" />
+    <Content Include="Views\Admin\TeacherManager.cshtml" />
+    <Content Include="Views\Admin\StudentManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
