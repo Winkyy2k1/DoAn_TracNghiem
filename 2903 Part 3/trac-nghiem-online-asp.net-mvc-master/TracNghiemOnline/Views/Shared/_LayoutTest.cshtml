@@ -1,0 +1,86 @@
+﻿@using TracNghiemOnline.Common
+@{
+   
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        @ViewBag.Title
+    </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Assets/css/normalize.css">
+    <link rel="stylesheet" href="~/Assets/css/style.min.css">
+    <link rel="stylesheet" href="~/Assets/css/font-awesome.css">
+    <link rel="stylesheet" href="~/Assets/css/materialize.min.css">
+    <link href="~/Assets/LandingPage/lib/flaticon/font/flaticon.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Assets/js/materialize.min.js"></script>
+    <style>
+        .nav-item1 {
+            color: #00394f;
+            padding: 30px 15px;
+            cursor: pointer;
+            font-family: "Nunito", sans-serif;
+            font-weight: 700 !important;
+        }
+            .nav-item1:hover {
+                color: #17a2b8;
+            }      
+    </style>
+</head>
+
+<header style="width: 100%; height: 80px; background-color: #fefcfc; display: flex">
+    <div style="margin: auto 8px">
+        <a href="/Home/Index" >
+            <img src="~/Assets/LandingPage/img/logo2.jpg" height="80px" style="margin-left: 20px" alt="Alternate Text" />
+        </a>
+    </div>   
+    <div class="navbar-nav" style="; margin: auto auto " >
+        <a href="/Home/Index" class="nav-item1"> Trang chủ</a>
+        <a href="/Home/About" class="nav-item1"> Thông tin </a>
+        <a href="#" class="nav-item1"> Lớp học </a>
+        <a href="#" class="nav-item1"> Giáo viên </a>
+        <a href="/Home/About" class="nav-item1"> Liên hệ </a>
+    </div>   
+    <div class="navbar-nav1" style="margin: auto 50px">
+    @{ if (@Session[UserSession.NAME] == null)
+        { <a href="/Login/Index" class="btn btn-primary px-4"> Đăng nhập &#10152;</a> }
+                else
+             {
+            {
+                int role = (int)Session[UserSession.PERMISSION];
+                if (role == 1)
+                {                  
+                    <span class="title_test" >Xin chào: @Session[UserSession.NAME] </span>
+                    <a href="/Admin/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
+                    else
+                    if (role == 2)
+                    {                      
+                        <span class="title" style="color: black; margin: 10px 30px">Xin chào: @Session[UserSession.NAME] </span>
+                        <a href="/Teacher/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
+                    else
+                    if (role == 3)
+                    {                       
+                    <span class="title" style="color: black; margin: 10px 30px">Xin chào: @Session[UserSession.NAME] </span>
+                    <a href="/Student/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
+                        }
+            } }
+    </div>
+
+</header>
+
+<body class="body-login scrollbar">
+
+        @RenderBody()
+  
+</body>
+
+<footer>
+
+</footer>
+
+</html>
