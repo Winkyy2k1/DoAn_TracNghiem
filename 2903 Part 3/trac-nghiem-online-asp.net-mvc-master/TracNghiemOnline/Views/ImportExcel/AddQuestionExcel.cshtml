@@ -1,8 +1,9 @@
-﻿
+﻿@using TracNghiemOnline.Models
 @{
-    ViewBag.Title = "Thêm sinh viên từ file Excel";
+    ViewBag.Title = "Thêm câu hỏi từ file Excel";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-
+ 
+    var ListSubject = ViewBag.ListSubject as List<subject>;
 }
 <div class="title-content">
     <span class="title">@ViewBag.Title</span>
@@ -20,12 +21,35 @@
         <p> •  Các trường tiêu đề có (*) là các trường bắt buộc điền </p>
     </div>
 
-    <div style="width: 800px; border: 1px solid #808080; padding: 20px; margin-left: 200px; margin-bottom: 20px; border-radius: 15px">
+    <table>
 
-        @{ using (Html.BeginForm("AddStudentExcel", "ImportExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    </table>
+
+    <div style="width: 800px; border: 1px solid #808080; padding: 0 20px; margin-left: 200px;  border-radius: 15px">
+
+        @{using (Html.BeginForm("AddQuestionExcel", "ImportExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
             {
                 <table width="650px">
+                    <tr>
+                        <td> Chọn Môn Học (*) </td>
+                        <td>   
+                            <select name="id_subject" style="display: block"; required>
+                                
+                                @foreach (var subject in ListSubject)
+                                {
+                                    <option value="@subject.id_subject">@subject.subject_name</option>}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Chương (*) </td>
+                        <td>
+                            <div class="input-field">
+                                <input style="width: 80px; padding: 0px" id="number" type="number" name="unit" value="1">
+                            </div>
+                        </td>
+                    </tr>
                     <tr>
                         <td width="250px">  Chọn File Excel:
                         <td>

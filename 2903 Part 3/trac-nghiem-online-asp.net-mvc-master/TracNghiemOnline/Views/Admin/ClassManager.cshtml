@@ -5,7 +5,8 @@
     var List = Model as List<ClassViewModel>;
     var ListGrades = ViewBag.ListGrades as List<grade>;
     var ListSpecialities = ViewBag.ListSpecialities as List<speciality>;
-   
+    var stt = 0 ;
+
 }
 
 <div class="title-content">
@@ -25,11 +26,11 @@
         <table class="striped centered" id="classes-table">
             <thead>
                 <tr>
-                    
-                    <th>ID Lớp </th>
-                    <th>Tên Lớp</th>
-                    <th>Tên Khóa</th>
-                    <th>Tên Ngành</th>
+                    <th width="10px"> </th>
+                    <th width="50px"> STT </th>
+                    @*<th width="100px"> ID Lớp </th>*@
+                    <th>Tên Lớp Học </th>
+                    <th> Khối </th>
                     <th>
                         <p>
                             <label>
@@ -47,12 +48,16 @@
 
             <tbody>
                 @foreach (var item in List)
-                {                  
-                    <tr>                        
-                        <td>@item.Class.id_class</td>
+                {
+                    stt = stt + 1;
+                    <tr> 
+                         <td></td>
+                         <td> @stt  </td>
+                        @*<td>@item.Class.id_class</td>*@
                         <td>@item.Class.class_name</td>
                         <td>@item.grade.grade_name</td>
-                        <td>@item.speciality.speciality_name</td>
+                       
+                        @*<td>@item.speciality.speciality_name</td>*@
                         <td>
                             <p>
                                 <label>
@@ -86,16 +91,16 @@
     <div class="row" style="display:inline-table; margin-left: 30%">
         <div class="col s12">
             <ul class="tabs">
-                <li class="tab col s12"><a href="#add_normal" class="active" style="color: #02796e; font-weight: bold;">Thêm Khóa/Lớp</a></li>
+                <li class="tab col s12"><a href="#add_normal" class="active" style="color: #02796e; font-weight: bold;">Thêm Lớp Học </a></li>
                 
             </ul>
         </div>
         <div id="add_normal" class="col s12">
             @using (Html.BeginForm("AddClass", "Admin", FormMethod.Post))
             {
-                <div class="col l6 s12">
+                <div class="col l12 s12">
                     <div class="input-field">
-                        <label for="email">Tên Lớp <span class="failed">(*)</span></label>
+                        <label for="email">Nhập Tên Lớp <span class="failed">(*)</span></label>
                         <input type="text" id="class_name" name="class_name" required>
                     </div>
                     <div class="input-field">
@@ -105,31 +110,10 @@
                                 <option value="@item.id_grade">@item.grade_name</option>
                             }
                         </select>
-                        <label>Khóa</label>
-                    </div>
-                    <div class="input-field">
-                        <select name="id_speciality" id="id_speciality" required>
-                            @foreach (var item in ListSpecialities)
-                            {
-                                <option value="@item.id_speciality">@item.speciality_name</option>
-                            }
-                        </select>
-                        <label>Ngành</label>
+                        <label> Chọn khối </label>
                     </div>
                     <div class="col s12">
                         <button type="submit" class="btn full-width" id="add-class" name="add-class">Thêm lớp học</button>
-                    </div>
-                </div>
-            }
-            @using (Html.BeginForm("AddGrade", "Admin", FormMethod.Post))
-            {
-                <div class="col l6 s12">
-                    <div class="input-field">
-                        <label for="name">Tên Khóa <span class="failed">(*)</span></label>
-                        <input type="text" id="grade_name" name="grade_name" required>
-                    </div>
-                    <div class="col s12">
-                        <button type="submit" class="btn full-width" id="add-grade" name="add-grade">Thêm Khoá học  </button>
                     </div>
                 </div>
             }

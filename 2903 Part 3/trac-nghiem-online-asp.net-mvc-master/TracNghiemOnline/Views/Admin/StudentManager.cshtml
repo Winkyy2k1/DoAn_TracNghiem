@@ -1,6 +1,6 @@
 ﻿@using TracNghiemOnline.Models
 @{
-    ViewBag.Title = "Quản Lý Sinh Viên";
+    ViewBag.Title = "Quản Lý Học Sinh";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var List = Model as List<StudentViewModel>;
     var ListClass = ViewBag.ListClass;
@@ -60,14 +60,14 @@
                         <td>
                              @{ 
                                  pass = item.student.password;
-                                @TracNghiemOnline.Common.Encryptor.DecodeFrom64(pass);
+                                  @TracNghiemOnline.Common.Encryptor.DecodeFrom64(pass);
                                  }
                         </td>
                         <td>@item.student.email</td>
                         <td>@item.student.name</td>
                         <td>@item.student.gender</td>
                         <td>@item.student.birthday.Date.ToString("dd-MM-yyyy")</td>
-                        <td>Lớp @item.Class.class_name <br />Ngành @item.speciality.speciality_name</td>
+                        <td> @item.Class.class_name </td>
                         <td>
                             @if (item.student.last_seen == null)
                             {
@@ -77,7 +77,8 @@
                             {
                                 <span>Online lần cuối lúc</span><br />
                                 @String.Format("{0:dd'-'MM'-'yyyy HH':'mm':'ss}", item.student.last_login) <br /><span>tại</span>
-                                <a href="@item.student.last_seen_url">@item.student.last_seen</a>
+                                @*<a href="@item.student.last_seen_url">@item.student.last_seen</a>*@
+                                <a href="">@item.student.last_seen</a>
                             }
                         </td>
                         <td>
@@ -113,7 +114,7 @@
     <div class="row" style="display:inline-grid; margin-left: 30%">
         <div class="col s12">
             <ul class="tabs">
-                <li class="tab col s12"><a href="#add_normal" class="active" style="color: #02796e; font-weight: bold;">Thêm Sinh Viên</a></li>
+                <li class="tab col s12"><a href="#add_normal" class="active" style="color: #02796e; font-weight: bold;">Thêm Học Sinh</a></li>
                
             </ul>
         </div>
@@ -122,11 +123,11 @@
             {
             <div class="col l6 s12">
                 <div class="input-field">
-                    <label for="name">Họ     và Tên <span class="failed">(*)</span></label>
+                    <label for="name">Họ và Tên <span class="failed">(*)</span></label>
                     <input type="text" id="name" name="name" onchange="" required>
                 </div>
                 <div class="input-field">
-                    <label for="username">Tài khoản <span class="failed">(*)</span></label>
+                    <label for="username">Tài khoản đăng nhập <span class="failed">(*)</span></label>
                     <input type="text" name="username" id="username" required>
                 </div>
                 <div class="input-field">
@@ -158,18 +159,10 @@
                         </select>
                         <label>Lớp</label>
                     </div>
-                    <div class="input-field">
-                        <select name="id_speciality" id="id_speciality" required>
-                            @foreach (var item in ListSpecialities)
-                            {
-                                <option value="@item.id_speciality">@item.speciality_name</option>
-                            }
-                        </select>
-                        <label>Chuyên ngành</label>
-                    </div>
+                    
                 </div>
                 <div class="col l12">
-                    <button type="submit" class="btn full-width" id="add-student" name="add-student">Thêm</button>
+                    <button type="submit" class="btn full-width" id="add-student" name="add-student">Thêm Học Sinh </button>
                 </div>
             }
         </div>

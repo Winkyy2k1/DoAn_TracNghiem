@@ -26,10 +26,10 @@
             {
                 <input type="hidden" id="id_class" name="id_class" required value="@cl.id_class" class="hidden">
                     <div class="input-field">
-                        <label for="name">Tên</label>
+                        <label for="name">Nhập tên lớp </label>
                         <input type="text" id="class_name" name="class_name" required value="@cl.class_name">
                     </div>
-                    <div class="input-field">
+                    @*<div class="input-field">
                         <select name="id_speciality" id="id_speciality" required>
                             @foreach (var item in ListSpecialities)
                             {
@@ -44,7 +44,7 @@
                             }
                         </select>
                         <label>Ngành</label>
-                    </div>
+                    </div>*@
                     <div class="input-field">
                         <select name="id_grade" id="id_grade" required>
                             @foreach (var item in ListGrades)
@@ -59,7 +59,7 @@
                                 }
                             }
                         </select>
-                        <label>Khpá</label>
+                        <label> Chọn Khối </label>
                     </div>
                     <button type="submit" class="btn full-width" id="edit-class" name="edit-class">Sửa</button>
             }

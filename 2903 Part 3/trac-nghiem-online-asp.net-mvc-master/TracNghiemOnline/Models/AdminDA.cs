@@ -192,7 +192,7 @@ namespace TracNghiemOnline.Models
                 update.id_speciality = id_speciality;
                 update.birthday = Convert.ToDateTime(birthday);
                 if (password != null)
-                    update.password = Common.Encryptor.EncodePassword(password);
+                     { update.password = Common.Encryptor.EncodePassword(password); }
                    // update.password = Common.Encryptor.MD5Hash(password);
                 db.SaveChanges();
             }

@@ -167,7 +167,9 @@ namespace TracNghiemOnline.Controllers
             string email = form["email"];
             string gender = form["gender"];
             string birthday = form["birthday"];
-            int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            int id_speciality = 1; 
+            //int id_speciality = Convert.ToInt32(form["id_speciality"]);
+
             bool add = Model.AddTeacher(name, username, password, gender, email, birthday, id_speciality);
             if (add)
             {
@@ -254,7 +256,8 @@ namespace TracNghiemOnline.Controllers
             string email = form["email"];
             string gender = form["gender"];
             string birthday = form["birthday"];
-            int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            // int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            int id_speciality = 1;
             bool edit = Model.EditTeacher(id_teacher, name, username, password, gender, email, birthday, id_speciality);
             if (edit)
             {
@@ -289,7 +292,8 @@ namespace TracNghiemOnline.Controllers
             string email = form["email"];
             string gender = form["gender"];
             string birthday = form["birthday"];
-            int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            // int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            int id_speciality = 1;
             int id_class = Convert.ToInt32(form["id_class"]);
             bool add = Model.AddStudent(name, username, password, gender, email, birthday, id_speciality, id_class);
             if (add)
@@ -378,7 +382,8 @@ namespace TracNghiemOnline.Controllers
             string email = form["email"];
             string gender = form["gender"];
             string birthday = form["birthday"];
-            int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            //int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            int id_speciality = 1;
             int id_class = Convert.ToInt32(form["id_class"]);
             bool edit = Model.EditStudent(id_student, name, username, password, gender, email, birthday, id_speciality, id_class);
             if (edit)
@@ -429,7 +434,8 @@ namespace TracNghiemOnline.Controllers
                 return View("Error");
             Model.UpdateLastSeen("Thêm Khóa", Url.Action("AddGrade"));
             string class_name = form["class_name"];
-            int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            // int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            int id_speciality = 1;
             int id_grade = Convert.ToInt32(form["id_grade"]);
             bool add = Model.AddClass(class_name, id_grade, id_speciality);
             if (add)
@@ -496,7 +502,7 @@ namespace TracNghiemOnline.Controllers
             try
             {
                 @class cl = Model.GetClass(id_class);
-                Model.UpdateLastSeen("Sửa Lớp " + cl.class_name, Url.Action("EditClass/" + id));
+                Model.UpdateLastSeen("Sửa Thông Tin Lớp " + cl.class_name, Url.Action("EditClass/" + id));
                 ViewBag.ListSpecialities = Model.GetSpecialities();
                 ViewBag.ListGrades = Model.GetGrades();
                 return View(cl);
@@ -513,7 +519,8 @@ namespace TracNghiemOnline.Controllers
                 return View("Error");
             int id_class = Convert.ToInt32(form["id_class"]);
             string class_name = form["class_name"];
-            int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            // int id_speciality = Convert.ToInt32(form["id_speciality"]);
+            int id_speciality = 1;
             int id_grade = Convert.ToInt32(form["id_grade"]);
             bool edit = Model.EditClass(id_class, class_name, id_speciality, id_grade);
             if (edit)
@@ -653,12 +660,12 @@ namespace TracNghiemOnline.Controllers
             if (add)
             {
                 TempData["status_id"] = true;
-                TempData["status"] = "Thêm Thành Công";
+                TempData["status"] = "Thêm Môn học Thành Công";
             }
             else
             {
                 TempData["status_id"] = false;
-                TempData["status"] = "Thêm Thất Bại";
+                TempData["status"] = "Thêm Môn học Thất Bại";
             }
             return RedirectToAction("SubjectManager");
         }

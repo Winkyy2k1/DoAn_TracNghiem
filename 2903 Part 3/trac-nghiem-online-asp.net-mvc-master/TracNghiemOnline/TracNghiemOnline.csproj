@@ -1944,8 +1944,10 @@
     <Content Include="Assets\js\materialize.min.js" />
     <Content Include="Assets\LandingPage\css\style.css" />
     <Content Include="Assets\LandingPage\css\style.min.css" />
+    <Content Include="Assets\LandingPage\img\404.jpg" />
     <Content Include="Assets\LandingPage\img\about-1.jpg" />
     <Content Include="Assets\LandingPage\img\about-2.jpg" />
+    <Content Include="Assets\LandingPage\img\anh_dang_nhap.jpg" />
     <Content Include="Assets\LandingPage\img\blog-1.jpg" />
     <Content Include="Assets\LandingPage\img\blog-2.jpg" />
     <Content Include="Assets\LandingPage\img\blog-3.jpg" />
