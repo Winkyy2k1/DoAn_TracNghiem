@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Thêm câu hỏi từ file Excel";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
- 
-    var ListSubject = ViewBag.ListSubject as List<subject>;
+
+    var ListSubject = ViewBag.ListSubject;
 }
 <div class="title-content">
     <span class="title">@ViewBag.Title</span>
@@ -43,7 +43,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td> Chương (*) </td>
+                        <td> Nhập chương số (*) </td>
                         <td>
                             <div class="input-field">
                                 <input style="width: 80px; padding: 0px" id="number" type="number" name="unit" value="1">

@@ -23,11 +23,13 @@ namespace TracNghiemOnline.Controllers
         }
         public ActionResult AddStudentExcel()
         {
-            return View();
+            ViewBag.ListClass = Model.GetClasses();
+            return View(Model.GetClasses());
         }
         [HttpPost]
         public ActionResult AddStudentExcel(FormCollection form, HttpPostedFileBase excelfile)
         {
+            bool check = false;
                 if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
                 {
                     string so_rd;
@@ -45,30 +47,43 @@ namespace TracNghiemOnline.Controllers
                     // add dữ liệu từ file excel vào csdl
 
                     List<student> list_student = new List<student>();
-                    for (int row = 5; row <= range.Rows.Count; row++)
-                    {
+                    for (int row = 4; row <= range.Rows.Count; row++)
+                    {   
                         student sv = new student();
-                        //g.grade_name = ((Excel.Range)range.Cells[row, 2]).Text;
+                        sv.id_class = Convert.ToInt32(form["id_class"]);                      
                         string firstname = "HS2023";
                         string name_rd = rd.Next(1000, 9999).ToString();
-                        sv.username = firstname + name_rd;
+                        sv.username = firstname + sv.id_class + name_rd;
                         sv.name = ((Excel.Range)range.Cells[row, 2]).Text;
                         string pass_temp = ((Excel.Range)range.Cells[row, 3]).Text;
                         sv.password = Common.Encryptor.EncodePassword(pass_temp);
                         sv.email = ((Excel.Range)range.Cells[row, 4]).Text;
                         sv.gender = ((Excel.Range)range.Cells[row, 5]).Text;
-                        sv.birthday = Convert.ToDateTime(((Excel.Range)range.Cells[row, 6]).Text);
+                        string ngaysinh = "01-01-2001";
+                        sv.birthday = Convert.ToDateTime(ngaysinh);
                         sv.avatar = "avatar-default.jpg";
                         sv.phone = "";
                         sv.id_permission = 3;
-                        sv.id_class = int.Parse(((Excel.Range)range.Cells[row, 7]).Text);
-                        sv.id_speciality = int.Parse(((Excel.Range)range.Cells[row, 8]).Text);
+                        sv.id_speciality = 1 ;  // chuyen nganh mac dinh
 
                         if (sv.name != null && !String.IsNullOrEmpty(sv.name) && sv.password != null && !String.IsNullOrEmpty(sv.password))
                         {
-                            list_student.Add(sv);
+                            if(sv.email != null && sv.gender != null )
+                            {
+                                list_student.Add(sv);
+                                check = true;
+                            }
+                            else
+                            {
+                                ViewBag.ListClass = Model.GetClasses();
+                                ViewBag.Error = "Đã tìm thấy lỗi trong file excel đầu vào. Vui lòng kiểm tra lại file.";
+                                return View("AddStudentExcel");                                
+                            }
                         }
                     }
+               
+                if (check)
+                {
                     using (trac_nghiem_onlineEntities db = new trac_nghiem_onlineEntities())
                     {
                         foreach (var item in list_student)
@@ -77,14 +92,25 @@ namespace TracNghiemOnline.Controllers
                             db.SaveChanges();
                         }
                     }
-                    ViewBag.Error = "Import thành công dữ liệu ";
+                    ViewBag.ListClass = Model.GetClasses();
+                    ViewBag.Error = "Import danh sách học sinh thành công. ";
                     return View("AddStudentExcel");
+
                 }
                 else
                 {
-                    ViewBag.Error = "Chỉ hỗ trợ file excel có đuôi là .xls và .xlsx. ";
-                    return View("AddStudentExcel");
+
+                    ViewBag.ListSubject = Model.GetSubjects();
+                    ViewBag.Error = "Import Không thành công. Có lỗi xảy ra với file";
+                    return View("AddQuestionExcel");
                 }
+            }
+            else
+            {
+                ViewBag.ListClass = Model.GetClasses();
+                ViewBag.Error = "Chỉ hỗ trợ file excel có đuôi là .xls và .xlsx. ";
+                return View("AddStudentExcel");
+            }
         }
         public ActionResult AddQuestionExcel()
         {
@@ -160,6 +186,7 @@ namespace TracNghiemOnline.Controllers
                 }
                else
                 {
+                   
                     ViewBag.ListSubject = Model.GetSubjects();
                     ViewBag.Error = "Import Không thành công. Có lỗi xảy ra với file";
                     return View("AddQuestionExcel");
