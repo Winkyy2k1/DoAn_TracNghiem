@@ -29,7 +29,7 @@ namespace TracNghiemOnline.Controllers
         [HttpPost]
         public ActionResult AddStudentExcel(FormCollection form, HttpPostedFileBase excelfile)
         {
-            bool check = false;
+                bool check = false;
                 if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
                 {
                     string so_rd;
@@ -45,7 +45,6 @@ namespace TracNghiemOnline.Controllers
                     Excel.Worksheet worksheet = workbook.ActiveSheet;
                     Excel.Range range = worksheet.UsedRange;
                     // add dữ liệu từ file excel vào csdl
-
                     List<student> list_student = new List<student>();
                     for (int row = 4; row <= range.Rows.Count; row++)
                     {   
@@ -81,7 +80,6 @@ namespace TracNghiemOnline.Controllers
                             }
                         }
                     }
-               
                 if (check)
                 {
                     using (trac_nghiem_onlineEntities db = new trac_nghiem_onlineEntities())
@@ -95,11 +93,9 @@ namespace TracNghiemOnline.Controllers
                     ViewBag.ListClass = Model.GetClasses();
                     ViewBag.Error = "Import danh sách học sinh thành công. ";
                     return View("AddStudentExcel");
-
                 }
                 else
                 {
-
                     ViewBag.ListSubject = Model.GetSubjects();
                     ViewBag.Error = "Import Không thành công. Có lỗi xảy ra với file";
                     return View("AddQuestionExcel");
