@@ -12,14 +12,22 @@ namespace TracNghiemOnline.Controllers
         User user = new User();
         TeacherDA Model = new TeacherDA();
         // GET: Teacher
-        public ActionResult Index()
+        public ActionResult Index(FormCollection form)
         {
             if (!user.IsTeacher())
                 return View("Error");
             Model.UpdateLastLogin();
             Model.UpdateLastSeen("Trang Chủ", Url.Action("Index"));
-            return View(Model.GetListTest());
+            //int id_subject = Convert.ToInt32(form["txtSearch"]);
+            string id_subject = form["txtSearch"];
+            
+            if (id_subject == null )
+                return View(Model.GetListTest());
+            else
+                //return View(Model.GetListTestBySubject(id_subject));
+                return View(Model.GetListTestByName(id_subject));
         }
+
         public ActionResult Preview(int id)
         {
             if (!user.IsTeacher())

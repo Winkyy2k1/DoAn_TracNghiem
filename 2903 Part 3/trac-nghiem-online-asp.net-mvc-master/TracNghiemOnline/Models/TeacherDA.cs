@@ -31,6 +31,45 @@ namespace TracNghiemOnline.Models
                                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             return tests;
         }
+
+        public List<TestViewModel> GetListTestBySubject(int id_subject1)
+        {
+            List<TestViewModel> tests = new List<TestViewModel>();
+            try
+            {
+               tests  = (from x in db.tests
+                   join s in db.subjects on x.id_subject equals s.id_subject
+                   join stt in db.statuses on x.id_status equals stt.id_status
+                   where s.id_subject == id_subject1
+                   select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return tests;
+        }
+
+        public List<TestViewModel> GetListTestByName(string name_test)
+        {
+            if (!String.IsNullOrEmpty(name_test)) { name_test = name_test.ToLower(); }
+                
+            List<TestViewModel> tests = new List<TestViewModel>();
+            try
+            {
+                tests = (from x in db.tests
+                         join s in db.subjects on x.id_subject equals s.id_subject
+                         join stt in db.statuses on x.id_status equals stt.id_status
+                         where x.test_name.ToLower().Contains(name_test)
+                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return tests;
+        }
+
         public List<ScoreViewModel> GetListScore(int test_code)
         {
             List<ScoreViewModel> score = new List<ScoreViewModel>();
