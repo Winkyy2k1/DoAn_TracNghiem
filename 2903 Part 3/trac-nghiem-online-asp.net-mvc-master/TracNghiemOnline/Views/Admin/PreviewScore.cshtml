@@ -1,7 +1,7 @@
 ﻿@using TracNghiemOnline.Models
 @{
-    ViewBag.Title = "Danh Sách Điểm Học Sinh của Bài Thi Mã đề: " + ViewBag.test_code + " (" + ViewBag.total + ")";  
-    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+    ViewBag.Title = "Danh Sách Điểm Học Sinh của Bài Thi Mã đề: " + ViewBag.test_code + " (" + ViewBag.total + ")";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var List = Model as List<ScoreViewModel>;
     
     int stt = 0;
@@ -11,8 +11,8 @@
     <span class="title">@ViewBag.Title</span>
 </div>
 
-<div class="content row col s12">
-   
+<div class="content">
+    
     <table class="striped centered" id="list-score">
             <thead>
                 <tr>

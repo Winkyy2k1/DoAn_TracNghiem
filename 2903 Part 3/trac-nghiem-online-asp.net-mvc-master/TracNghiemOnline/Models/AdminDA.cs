@@ -717,5 +717,22 @@ namespace TracNghiemOnline.Models
             return list_quest;
         }
 
+        public List<ScoreViewModel> GetListScore(int test_code)
+        {
+            List<ScoreViewModel> score = new List<ScoreViewModel>();
+            try
+            {
+                score = (from x in db.scores
+                         join s in db.students on x.id_student equals s.id_student
+                         where x.test_code == test_code
+                         select new ScoreViewModel { score = x, student = s }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return score;
+        }
+
     }
 }

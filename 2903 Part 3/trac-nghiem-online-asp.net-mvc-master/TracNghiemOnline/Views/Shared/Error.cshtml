@@ -1,7 +1,6 @@
 ﻿@using TracNghiemOnline.Common
 @{ 
-    ViewBag.Title = "Lỗi truy cập";
-    ViewBag.copyright = "Copyright 2023 by Bùi Thị Hải";
+    ViewBag.Title = " Có lỗi truy cập";
     ViewBag.name = "Hệ Thống Thi Trắc Nghiệm Online";
     Layout = "~/Views/Shared/_Layout.cshtml";
     }
@@ -11,16 +10,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>
-        Lỗi
-    </title>
-    <link rel="stylesheet" href="~/Assets/res/css/normalize.css">
-    <link rel="stylesheet" href="~/Assets/css/style.min.css">
-    <link rel="stylesheet" href="~/Assets/css/font-awesome.css">
-    <link rel="stylesheet" href="~/Assets/css/materialize.min.css">
-    @Scripts.Render("~/bundles/jquery")
-    <script src="~/Assets/js/materialize.min.js"></script>
-
+    @* Landing Page *@
+    <link href="Assets/LandingPage/img/favicon.ico" rel="icon" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/flaticon/font/flaticon.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
+    <link href="~/Assets/LandingPage/css/style.css" rel="stylesheet" />
     <style>
         .col-middle {
             vertical-align: middle;
@@ -28,7 +26,7 @@
 
         .col-middle {
             float: none;
-            margin: auto 0;
+            margin-top: 10%;
             margin-left: 100px;
             padding-left: 100px;
         }
@@ -36,6 +34,7 @@
         .robo_body {
             animation: float 4s ease-in-out infinite;
             z-index: 30;
+            margin-top: 40px;
         }
     </style>
 
@@ -43,22 +42,19 @@
 
 <body class="body-login">
 
-    <div class="title-content">
-        <a href="#" class="title" onclick="window.history.back()">Quay Lại</a>
-        <span class="title">@ViewBag.Title</span>
-    </div>
+   
 
     <div class="">
         <div class="page-container page-container-responsive">
             <div class="row space-top-8 space-8 row-table">
                 <div class="col-lg-5 text-right col-middle">
-                    <h3>THÔNG BÁO!</h3>
-                    <span class="failed">Lỗi: Bạn không có quyền truy cập trang này. Vui lòng kiểm tra lại. </span>
+                    <h1>THÔNG BÁO!</h1>
+                    <span class="failed" style="color:red">Lỗi: Bạn không có quyền truy cập trang này. Vui lòng kiểm tra lại. </span>
                     <br />
                     <a href="#" class="btn btn-danger" style="margin-top:20px" onclick="window.history.back()">Quay Lại</a>
                 </div>
                 <div class="col-lg-5 text-left robo_figure">
-                    <img class="robo_body" src="~/Assets/LandingPage/img/404.jpg" width="80%" alt="Girl has dropped her ice cream.">
+                    <img class="robo_body" src="~/Assets/LandingPage/img/404-removebg-preview.png" height="100%" alt="Girl has dropped her ice cream.">
                 </div>
             </div>
         </div>

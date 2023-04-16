@@ -11,11 +11,15 @@
     <span class="title">@ViewBag.Title</span>
 </div>
 <div class="content s12">
-        <table class="striped centered" id="questions-table">
+        <table class="striped centered" id="questions-table" >
             <thead>
                 <tr>
                     <th> STT </th>
-                    <th>Nội Dung Câu Hỏi</th>
+                    <th> Nội Dung Câu Hỏi</th>
+                    <th> Đáp án A </th>
+                    <th> Đáp án B </th>
+                    <th> Đáp án C </th>
+                    <th> Đáp án D </th>
                     <th> Đáp án đúng </th>
                     <th> </th>
                 </tr>
@@ -27,7 +31,7 @@
                     stt = stt + 1;
                     <tr>
                         <td> @stt  </td>
-                        <td>
+                        <td style="text-align: left">
                             @item.content
                             @if (!item.img_content.Equals("noimage.png"))
                             {
@@ -35,7 +39,11 @@
                                
                             }
                         </td>
-                        <td> @item.correct_answer </td>
+                        <td> @item.answer_a</td>
+                        <td> @item.answer_b</td>
+                        <td> @item.answer_c</td>
+                        <td> @item.answer_d</td>
+                        <td style="color: green"> @item.correct_answer </td>
                     </tr>
                 }
             </tbody>

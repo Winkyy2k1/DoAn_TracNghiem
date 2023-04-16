@@ -1087,5 +1087,16 @@ namespace TracNghiemOnline.Controllers
                 return View("Error");
             }
         }
+
+        public ActionResult PreviewScore(int id)
+        {
+            if (!user.IsAdmin())
+                return View("Error");
+            var list = Model.GetListScore(id);
+            ViewBag.test_code = id;
+            ViewBag.total = list.Count;
+            return View(list);
+        }
+
     }
 }

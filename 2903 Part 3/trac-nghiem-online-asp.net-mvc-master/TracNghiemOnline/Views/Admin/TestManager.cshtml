@@ -34,7 +34,7 @@
                         <i class="material-icons" id="icon-settings">settings</i>
                         <input type="submit" class="material-icons hidden" value="delete_forever" style="background: none; border: none; cursor: pointer; color: red;" id="icon-delete-all" />
                     </th>
-                   
+                    <th width="80px"> Kết quả thi </th>
                 </tr>
             </thead>
 
@@ -62,7 +62,9 @@
                         <a href="@Url.Action("ToggleStatus/" + item.test.test_code)">Mở/Đóng</a><br />
                         <a href="@Url.Action("TestDetail/" + item.test.test_code)">Chi tiết đề thi</a>
                     </td>
-                  
+                    <td>
+                        <a href="@Url.Action("PreviewScore/" + item.test.test_code)"> Kết quả </a>
+                    </td>
                 </tr>
                 }
             </tbody>

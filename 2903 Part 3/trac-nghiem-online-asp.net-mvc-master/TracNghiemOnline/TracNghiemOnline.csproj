@@ -1944,6 +1944,7 @@
     <Content Include="Assets\js\materialize.min.js" />
     <Content Include="Assets\LandingPage\css\style.css" />
     <Content Include="Assets\LandingPage\css\style.min.css" />
+    <Content Include="Assets\LandingPage\img\404-removebg-preview.png" />
     <Content Include="Assets\LandingPage\img\404.jpg" />
     <Content Include="Assets\LandingPage\img\about-1.jpg" />
     <Content Include="Assets\LandingPage\img\about-2.jpg" />
@@ -2029,7 +2030,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Login\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -2358,12 +2358,13 @@
     <Content Include="Views\Student\PreviewTest.cshtml" />
     <Content Include="Views\Teacher\Preview.cshtml" />
     <Content Include="Views\Shared\_LayoutTest.cshtml" />
-    <Content Include="Views\Shared\_LayoutAdmin - Copy.cshtml" />
+    <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\ImportExcel\AddStudentExcel.cshtml" />
     <Content Include="Views\ImportExcel\AddQuestionExcel.cshtml" />
+    <Content Include="Views\Admin\PreviewScore.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
