@@ -12,6 +12,18 @@ namespace TracNghiemOnline.Controllers
         User user = new User();
         TeacherDA Model = new TeacherDA();
         // GET: Teacher
+
+        //public ActionResult Index()
+        //{
+        //    if (!user.IsTeacher())
+        //        return View("Error");
+        //    Model.UpdateLastLogin();
+        //    Model.UpdateLastSeen("Trang Chủ", Url.Action("Index"));
+        //    ViewBag.ListSubject = Model.GetSubjects();
+        //    return View(Model.GetListTest());
+        //}
+
+
         public ActionResult Index(FormCollection form)
         {
             if (!user.IsTeacher())
@@ -19,13 +31,36 @@ namespace TracNghiemOnline.Controllers
             Model.UpdateLastLogin();
             Model.UpdateLastSeen("Trang Chủ", Url.Action("Index"));
             //int id_subject = Convert.ToInt32(form["txtSearch"]);
-            string id_subject = form["txtSearch"];
-            
-            if (id_subject == null )
+
+            string text = form["txtSearch"];      // text tìm kiếm 
+            int sub_droplist = Convert.ToInt32(form["id_subject"]);   // droplist 
+
+            if (sub_droplist == 0 && String.IsNullOrEmpty(text))
+            {
+                ViewBag.ListSubject = Model.GetSubjects();
                 return View(Model.GetListTest());
+            }
             else
-                //return View(Model.GetListTestBySubject(id_subject));
-                return View(Model.GetListTestByName(id_subject));
+            {
+                if (String.IsNullOrEmpty(text) && sub_droplist > 0)
+                {
+                    
+                    ViewBag.ListSubject = Model.GetSubjects();
+                    return View(Model.GetListTestBySubject(sub_droplist));
+                }
+                else
+                {
+                    if (!String.IsNullOrEmpty(text) && sub_droplist == 0)
+                    {
+                        
+                        ViewBag.ListSubject = Model.GetSubjects();
+                        return View(Model.GetListTestByName(text));
+                    }
+                   
+                    ViewBag.ListSubject = Model.GetSubjects();
+                    return View(Model.GetListTestBySubject_Name(sub_droplist,text));
+                }
+            }
         }
 
         public ActionResult Preview(int id)

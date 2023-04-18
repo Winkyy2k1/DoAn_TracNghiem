@@ -13,7 +13,20 @@ namespace TracNghiemOnline.Controllers
         User user = new User();
         StudentDA Model = new StudentDA();
         // GET: Student
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    if (!user.IsStudent())
+        //        return View("Error");
+        //    if (user.IsTesting())
+        //        return RedirectToAction("DoingTest");
+        //    Model.UpdateLastLogin();
+        //    Model.UpdateLastSeen("Trang Chủ", Url.Action("Index"));
+        //    ViewBag.score = Model.GetStudentTestcode();
+        //    return View(Model.GetDashboard());
+        //}
+
+
+        public ActionResult Index(FormCollection form)
         {
             if (!user.IsStudent())
                 return View("Error");
@@ -21,9 +34,42 @@ namespace TracNghiemOnline.Controllers
                 return RedirectToAction("DoingTest");
             Model.UpdateLastLogin();
             Model.UpdateLastSeen("Trang Chủ", Url.Action("Index"));
-            ViewBag.score = Model.GetStudentTestcode();
-            return View(Model.GetDashboard());
+            //int id_subject = Convert.ToInt32(form["txtSearch"]);
+
+            string text = form["txtSearch"];      // text tìm kiếm 
+            int sub_droplist = Convert.ToInt32(form["id_subject"]);   // droplist 
+
+            if (sub_droplist == 0 && String.IsNullOrEmpty(text))
+            {
+                ViewBag.ListSubject = Model.GetSubjects();
+                ViewBag.score = Model.GetStudentTestcode();
+                return View(Model.GetDashboard());
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(text) && sub_droplist > 0)
+                {
+                    ViewBag.ListSubject = Model.GetSubjects();
+                    ViewBag.score = Model.GetStudentTestcode();
+                    return View(Model.GetDashboardBySubject(sub_droplist));
+                }
+                else
+                {
+                    if (!String.IsNullOrEmpty(text) && sub_droplist == 0)
+                    {
+                        ViewBag.ListSubject = Model.GetSubjects();
+                        ViewBag.score = Model.GetStudentTestcode();
+                        return View(Model.GetDashboardByName(text));
+                    }
+
+                    ViewBag.ListSubject = Model.GetSubjects();
+                    ViewBag.score = Model.GetStudentTestcode();
+                    return View(Model.GetDashboardSubject_Name(sub_droplist, text));
+                }
+            }
         }
+
+
         [HttpPost]
         public ActionResult CheckPassword(FormCollection form)
         {

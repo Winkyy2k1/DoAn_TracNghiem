@@ -96,7 +96,7 @@ namespace TracNghiemOnline.Controllers
                 }
                 else
                 {
-                    ViewBag.ListSubject = Model.GetSubjects();
+                    ViewBag.ListClass = Model.GetClasses();
                     ViewBag.Error = "Import Không thành công. Có lỗi xảy ra với file";
                     return View("AddQuestionExcel");
                 }

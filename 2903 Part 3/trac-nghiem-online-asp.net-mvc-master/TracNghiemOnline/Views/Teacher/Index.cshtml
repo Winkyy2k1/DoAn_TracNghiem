@@ -2,11 +2,32 @@
 @{
     ViewBag.Title = "Danh sách đề thi";
     Layout = "~/Views/Shared/_LayoutTest.cshtml";
-    var ListTest = Model as List<TestViewModel>;
+
+    var ListSubject = ViewBag.ListSubject;
+    var ListTest = Model as List<TestViewModel>;   
     var stt = 0;
 }
 
 <header>
+    <style>
+        .search-table {
+            background-color: #fefcfc;
+            margin: 10px 0;
+        }
+            .search-table td {
+                padding: 0 20px;
+                height: 80px;
+                font-size: 18px;
+            }
+
+        #txtSearch{
+            font-size: 18px;
+            color: black;
+        }
+        ::placeholder {
+            color: #191717;
+        }
+    </style>
 </header>
 
 <div class="title-content">
@@ -15,12 +36,30 @@
 <div class="content row col s6 reset-margin">
      @{using (Html.BeginForm("Index", "Teacher", FormMethod.Post))
          {
-            <div class="form-group">
-               <input type="text" class="form-control"  name="txtSearch" id="txtSearch" placeholder="Nhập tên bài thi cần tìm">
-               <input type="submit" class="btn" value="Tìm kiếm ">
-            </div>
-          
-             } }
+             <table class="search-table">
+                 <tr>
+                     <td width="200px" style="text-align:right"> <span> Tìm kiếm </span>  </td>
+                     <td width="300px" >
+                            <div class="dropdown-list" style="width: 300px">
+                            <select name="id_subject" id="id_subject" style="display: block" required>
+                                <option value="0" selected> Tất cả môn học </option>
+                                @foreach (var item2 in ListSubject)
+                                {
+                                    <option value="@item2.id_subject"> @item2.subject_name </option>
+                                }
+                            </select>                   
+                          </div>
+                     </td>
+                     <td width="350px">
+                         <input type="text" class="form-control" name="txtSearch" id="txtSearch" placeholder="Nhập tên bài thi cần tìm">
+                     </td>
+                     <td >
+                         <input style="margin-left: 20px; font-size: 18px" type="submit" class="btn" value="Tìm kiếm ">
+                     </td>
+                 </tr>
+             </table>
+           
+       } }
 
             @foreach (var item in ListTest)
             {
@@ -39,11 +78,10 @@
                     </div>
                 </div>
             }
-        
             @{ 
                 if(stt == 0)
                 {
-                    <h4>   Không tìm thấy dữ liệu bài thi nào. </h4>
+                    <h5 style="text-align: center; margin-left: 20px">Không tìm thấy dữ liệu bài thi nào. </h5>
                 }
                     
             }

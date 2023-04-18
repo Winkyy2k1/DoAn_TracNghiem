@@ -31,6 +31,65 @@ namespace TracNghiemOnline.Models
                                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             return tests;
         }
+
+        public List<TestViewModel> GetDashboardBySubject(int id_subject1)
+        {
+            List<TestViewModel> tests = new List<TestViewModel>();
+            try
+            {
+                tests = (from x in db.tests
+                         join s in db.subjects on x.id_subject equals s.id_subject
+                         join stt in db.statuses on x.id_status equals stt.id_status
+                         where s.id_subject == id_subject1
+                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return tests;
+        }
+
+        public List<TestViewModel> GetDashboardSubject_Name(int id_subject1, string name_test)
+        {
+            if (!String.IsNullOrEmpty(name_test)) { name_test = name_test.ToLower().Trim(); }
+            List<TestViewModel> tests = new List<TestViewModel>();
+            try
+            {
+                tests = (from x in db.tests
+                         join s in db.subjects on x.id_subject equals s.id_subject
+                         join stt in db.statuses on x.id_status equals stt.id_status
+                         where (s.id_subject == id_subject1) && (x.test_name.ToLower().Contains(name_test))
+                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return tests;
+        }
+
+        public List<TestViewModel> GetDashboardByName(string name_test)
+        {
+            if (!String.IsNullOrEmpty(name_test)) { name_test = name_test.ToLower().Trim(); }
+
+            List<TestViewModel> tests = new List<TestViewModel>();
+            try
+            {
+                tests = (from x in db.tests
+                         join s in db.subjects on x.id_subject equals s.id_subject
+                         join stt in db.statuses on x.id_status equals stt.id_status
+                         where x.test_name.ToLower().Contains(name_test)
+                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return tests;
+        }
+
+
         public test GetTest(int test_code)
         {
             test test = new test();
@@ -44,6 +103,13 @@ namespace TracNghiemOnline.Models
             }
             return test;
         }
+
+        public List<subject> GetSubjects()
+        {
+            return db.subjects.ToList();
+        }
+
+
         public void UpdateStatus(int test_code, string time_remaining)
         {
             var update = (from x in db.students where x.id_student == user.ID select x).Single();
