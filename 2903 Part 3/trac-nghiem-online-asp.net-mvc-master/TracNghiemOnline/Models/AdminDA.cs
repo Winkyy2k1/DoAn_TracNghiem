@@ -207,6 +207,8 @@ namespace TracNghiemOnline.Models
         {
             return db.classes.ToList();
         }
+
+
         public List<StudentViewModel> GetStudents()
         {
             List<StudentViewModel> students = (from x in db.students

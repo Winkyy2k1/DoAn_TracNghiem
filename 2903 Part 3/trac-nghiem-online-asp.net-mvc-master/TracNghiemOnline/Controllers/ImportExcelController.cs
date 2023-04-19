@@ -21,6 +21,90 @@ namespace TracNghiemOnline.Controllers
         {
             return View();
         }
+        public ActionResult AddTeacherExcel()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult AddTeacherExcel(FormCollection form, HttpPostedFileBase excelfile)
+        {
+            bool check = false;
+            if (excelfile.FileName.EndsWith("xls") || excelfile.FileName.EndsWith("xlsx"))
+            {
+                string so_rd;
+                Random rd = new Random();
+                so_rd = rd.Next(1, 100000).ToString();
+                string path = Server.MapPath("~/Content/" + so_rd + excelfile.FileName);
+                if (System.IO.File.Exists(path))
+                    System.IO.File.Delete(path);
+                excelfile.SaveAs(path);
+                // Đọc file từ Excel 
+                Excel.Application application = new Excel.Application();
+                Excel.Workbook workbook = application.Workbooks.Open(path);
+                Excel.Worksheet worksheet = workbook.ActiveSheet;
+                Excel.Range range = worksheet.UsedRange;
+                // add dữ liệu từ file excel vào csdl
+                List<teacher> list_teacher = new List<teacher>();
+                for (int row = 4; row <= range.Rows.Count; row++)
+                {
+                    teacher gv = new teacher();                   
+                    string firstname = "GV2023";
+                    string name_rd = rd.Next(1000, 9999).ToString();
+                    gv.username = firstname + name_rd;
+                    gv.name = ((Excel.Range)range.Cells[row, 2]).Text;
+                    //string pass_temp = ((Excel.Range)range.Cells[row, 3]).Text;
+                    string pass_temp = gv.username;
+                    gv.password = Common.Encryptor.EncodePassword(pass_temp);
+                    gv.email = ((Excel.Range)range.Cells[row, 3]).Text;
+                    gv.gender = ((Excel.Range)range.Cells[row, 4]).Text;
+                    string ngaysinh = "01-01-1997";
+                    gv.birthday = Convert.ToDateTime(ngaysinh);
+                    gv.avatar = "avatar-default.jpg";
+                    gv.phone = "";
+                    gv.id_permission = 2;
+                    gv.id_speciality = 1;  // chuyen nganh mac dinh
+
+                    if (gv.name != null && !String.IsNullOrEmpty(gv.name) && gv.password != null && !String.IsNullOrEmpty(gv.password))
+                    {
+                        if (gv.email != null && gv.gender != null)
+                        {
+                            list_teacher.Add(gv);
+                            check = true;
+                        }
+                        else
+                        {
+                            ViewBag.Error = "Đã tìm thấy lỗi trong file excel đầu vào. Vui lòng kiểm tra lại file.";
+                            return View("AddTeacherExcel");
+                        }
+                    }
+                }
+                if (check)
+                {
+                    using (trac_nghiem_onlineEntities db = new trac_nghiem_onlineEntities())
+                    {
+                        foreach (var item in list_teacher)
+                        {
+                            db.teachers.Add(item);
+                            db.SaveChanges();
+                        }
+                    }                   
+                    ViewBag.Error = "Import danh sách giáo viên thành công. ";
+                    return View("AddTeacherExcel");
+                }
+                else
+                {
+                    ViewBag.Error = "Import Không thành công. Có lỗi xảy ra với file";
+                    return View("AddTeacherExcel");
+                }
+            }
+            else
+            {
+                ViewBag.Error = "Chỉ hỗ trợ file excel có đuôi là .xls và .xlsx. ";
+                return View("AddTeacherExcel");
+            }
+        }
+        [HttpPost]
+
         public ActionResult AddStudentExcel()
         {
             ViewBag.ListClass = Model.GetClasses();

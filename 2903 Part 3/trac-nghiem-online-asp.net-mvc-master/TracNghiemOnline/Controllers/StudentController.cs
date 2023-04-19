@@ -69,7 +69,6 @@ namespace TracNghiemOnline.Controllers
             }
         }
 
-
         [HttpPost]
         public ActionResult CheckPassword(FormCollection form)
         {

@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Thêm Giáo viên từ file Excel";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="title-content">
+    <span class="title">@ViewBag.Title</span>
+
+</div>
+<div style="margin-left: 20px; ">
+    <h5>
+        <i class="fa fa-bullhorn" aria-hidden="true"></i>
+        Lưu ý :
+    </h5>
+    <div style="width: 98%; background-color: antiquewhite; padding:10px 20px; margin-bottom: 20px">
+        <p> •  Vui lòng tải file mẫu mới nhất về và thao tác để đảm bảo kết quả chính xác. </p>
+        <p> •  Các định dạng file hỗ trợ là xlsx và xls . </p>
+        <p> •  Vui lòng không thay đổi tiêu đề, và thứ tự các cột trong file mẫu. </p>
+        <p> •  Các trường tiêu đề có (*) là các trường bắt buộc điền </p>
+    </div>
+
+    <div style="width: 800px; border: 1px solid #808080; padding: 20px; margin-left: 200px; margin-bottom: 20px; border-radius: 15px">
+
+        @{ using (Html.BeginForm("AddTeacherExcel", "ImportExcel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+            {
+                <table width="650px">                                       
+                    <tr>
+                        <td width="250px">  Chọn File Excel (*):
+                        <td>
+                            <input type="file" style="" name="excelfile" id="excelfile" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button class="" style="height: 40px; border-radius: 10px">
+                                <a href="https://bom.so/lAjzAw">
+                                    <i class="fa fa-file-excel" aria-hidden="true"></i> Tải xuống file mẫu
+                                </a>
+                            </button>
+                            <br />
+
+                        </td>
+                        <td>  @Html.Raw(ViewBag.Error) </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <button class="btn btn-primary" type="submit" style="margin-left: 30%">
+                                Import File
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+
+            }
+        }
+
+    </div>
+
+</div>

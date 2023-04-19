@@ -2366,6 +2366,7 @@
     <Content Include="Views\ImportExcel\AddQuestionExcel.cshtml" />
     <Content Include="Views\Admin\PreviewScore.cshtml" />
     <Content Include="Views\Teacher\Index2.cshtml" />
+    <Content Include="Views\ImportExcel\AddTeacherExcel.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
