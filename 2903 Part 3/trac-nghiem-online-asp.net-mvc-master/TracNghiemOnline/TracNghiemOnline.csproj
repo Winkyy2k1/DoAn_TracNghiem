@@ -2369,6 +2369,7 @@
     <Content Include="Views\ImportExcel\AddTeacherExcel.cshtml" />
     <Content Include="Views\Shared\_LayoutTestTeacher.cshtml" />
     <Content Include="Views\Teacher\DeLuyenTap.cshtml" />
+    <Content Include="Views\Admin\DeLTManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

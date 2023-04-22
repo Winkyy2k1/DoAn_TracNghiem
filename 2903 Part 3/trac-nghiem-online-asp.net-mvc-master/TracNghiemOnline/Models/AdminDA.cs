@@ -601,14 +601,14 @@ namespace TracNghiemOnline.Models
             }
             return true;
         }
-        public List<TestViewModel> Tests()
-        {
-            List<TestViewModel> tests = (from x in db.tests
-                                         join s in db.subjects on x.id_subject equals s.id_subject
-                                         join stt in db.statuses on x.id_status equals stt.id_status
-                                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
-            return tests;
-        }
+        //public List<TestViewModel> Tests()
+        //{
+        //    List<TestViewModel> tests = (from x in db.tests
+        //                                 join s in db.subjects on x.id_subject equals s.id_subject
+        //                                 join stt in db.statuses on x.id_status equals stt.id_status
+        //                                 select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+        //    return tests;
+        //}
 
         public List<TestViewModel> GetTests()
         {

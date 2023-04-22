@@ -946,10 +946,20 @@ namespace TracNghiemOnline.Controllers
         {
             if (!user.IsAdmin())
                 return View("Error");
-            Model.UpdateLastSeen("Quản Lý Bài Thi", Url.Action("TestManager"));
+            Model.UpdateLastSeen("Kho đề thi", Url.Action("TestManager"));
             ViewBag.ListSubject = Model.GetSubjects();
-            return View(Model.Tests());
+            return View(Model.GetTests());
         }
+
+        public ActionResult DeLTManager()
+        {
+            if (!user.IsAdmin())
+                return View("Error");
+            Model.UpdateLastSeen("Kho đề luyện tập", Url.Action("DeLTManager"));
+            ViewBag.ListSubject = Model.GetSubjects();
+            return View(Model.GetDeLuyenTap());
+        }
+
         public JsonResult GetJsonUnits(int id)
         {
             return Json(Model.GetUnits(id), JsonRequestBehavior.AllowGet);
@@ -996,6 +1006,50 @@ namespace TracNghiemOnline.Controllers
             }
             return RedirectToAction("TestManager");
         }
+
+        public ActionResult AddDeLuyenTap(FormCollection form)
+        {
+            if (!user.IsAdmin())
+                return View("Error");
+            Model.UpdateLastSeen("Thêm Đề Luyện tập", Url.Action("AddDeLuyenTap"));
+            //tạo đề thi
+            string test_name = form["test_name"];
+            //string password = Common.Encryptor.MD5Hash(form["password"]);
+            string password = Common.Encryptor.EncodePassword(form["password"]);
+            //sinh số test code ngẫu nhiên
+            Random rnd = new Random();
+            int test_code = rnd.Next(111111, 999999);
+            int id_subject = Convert.ToInt32(form["id_subject"]);
+            int total_question = Convert.ToInt32(form["total_question"]);
+            int time_to_do = Convert.ToInt32(form["time_to_do"]);
+            string note = "";
+            if (form["note"] != "")
+                note = form["note"];
+            bool add = Model.AddDeLuyenTap(test_name, password, test_code, id_subject, total_question, time_to_do, note);
+            if (add)
+            {
+                TempData["status_id"] = true;
+                TempData["status"] = "Thêm Thành Công";
+                //tạo bộ câu hỏi cho đề thi
+                List<UnitViewModel> list_unit = Model.GetUnits(id_subject);
+                foreach (UnitViewModel unit in list_unit)
+                {
+                    int quest_of_unit = Convert.ToInt32(form["unit-" + unit.Unit]);
+                    List<question> list_question = Model.GetQuestionsByUnit(id_subject, unit.Unit, quest_of_unit);
+                    foreach (question item in list_question)
+                    {
+                        Model.AddQuestionsToTest(test_code, item.id_question);
+                    }
+                }
+            }
+            else
+            {
+                TempData["status_id"] = false;
+                TempData["status"] = "Thêm Thất Bại";
+            }
+            return RedirectToAction("DeLTManager");
+        }
+
         public ActionResult EditTest(string id)
         {
             if (!user.IsAdmin())
@@ -1053,6 +1107,20 @@ namespace TracNghiemOnline.Controllers
                 TempData["status"] = "Đã Thay Đổi Trạng Thái Đề Thi " + id_test;
             }
             return RedirectToAction("TestManager/" + id_test);
+        }
+
+        public ActionResult ToggleStatusLT(int id)
+        {
+            if (!user.IsAdmin())
+                return View("Error");
+            int id_test = Convert.ToInt32(id);
+            bool toggle = Model.ToggleStatus(id_test);
+            if (toggle)
+            {
+                TempData["status_id"] = true;
+                TempData["status"] = "Đã Thay Đổi Trạng Thái Đề Thi " + id_test;
+            }
+            return RedirectToAction("DeLTManager/" + id_test);
         }
         public ActionResult TestDetail(string id)
         {

@@ -6,7 +6,7 @@
 }
 
 <div class="title-content">
-    <a class="title" href="@Url.Action("TestManager")">Quay Lại</a>
+    <a class="title" href="#" onclick="window.history.back()  ">Quay Lại</a>
     <span class="title">@ViewBag.Title</span>
     @if (TempData["status_id"] != null && (bool)TempData["status_id"])
     {

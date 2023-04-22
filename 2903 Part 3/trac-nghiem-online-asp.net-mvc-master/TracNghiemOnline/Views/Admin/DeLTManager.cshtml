@@ -1,6 +1,6 @@
 ﻿@using TracNghiemOnline.Models
 @{
-    ViewBag.Title = "Quản Lý Bài Thi";
+    ViewBag.Title = " Quản lý đề luyện tập ";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var List = Model as List<TestViewModel>;
     var ListSubject = ViewBag.ListSubject;
@@ -24,7 +24,7 @@
             <thead>
                 <tr>
                     <th>STT</th>
-                    <th>Tên đề thi</th>
+                    <th>Tên đề luyện tập</th>
                     <th>Mã Đề</th>
                     <th> Mật khẩu đề </th>
                     <th>Môn học </th>
@@ -59,7 +59,7 @@
                     <td>@item.status.status_name</td>
                     <td>
                         <a href="@Url.Action("EditTest/" + item.test.test_code)"><i class="material-icons">edit</i></a><br />
-                        <a href="@Url.Action("ToggleStatus/" + item.test.test_code)">Mở/Đóng</a><br />
+                        <a href="@Url.Action("ToggleStatusLT/" + item.test.test_code)">Mở/Đóng</a><br />
                         <a href="@Url.Action("TestDetail/" + item.test.test_code)">Chi tiết đề thi</a>
                     </td>
                     <td>
@@ -79,7 +79,7 @@
             </ul>
         </div>
         <div id="add_normal" class="col s12">
-            @using (Html.BeginForm("AddTest", "Admin", FormMethod.Post))
+            @using (Html.BeginForm("AddDeLuyenTap", "Admin", FormMethod.Post))
             {
                 <div class="input-field">
                     <label for="email">Tên <span class="failed">(*)</span></label>
@@ -114,7 +114,7 @@
                     <textarea name="note" class="materialize-textarea"></textarea>
                     <label for="content">Ghi chú</label>
                 </div>
-                <button type="submit" class="btn full-width" id="add-test" name="add-test">Thêm đề thi </button>
+                <button type="submit" class="btn full-width" id="add-test" name="add-test">Thêm đề luyện tập </button>
             }
         </div>
        
