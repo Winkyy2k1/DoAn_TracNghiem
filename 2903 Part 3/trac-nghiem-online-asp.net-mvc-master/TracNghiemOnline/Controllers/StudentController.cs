@@ -13,19 +13,6 @@ namespace TracNghiemOnline.Controllers
         User user = new User();
         StudentDA Model = new StudentDA();
         // GET: Student
-        //public ActionResult Index()
-        //{
-        //    if (!user.IsStudent())
-        //        return View("Error");
-        //    if (user.IsTesting())
-        //        return RedirectToAction("DoingTest");
-        //    Model.UpdateLastLogin();
-        //    Model.UpdateLastSeen("Trang Chủ", Url.Action("Index"));
-        //    ViewBag.score = Model.GetStudentTestcode();
-        //    return View(Model.GetDashboard());
-        //}
-
-
         public ActionResult Index(FormCollection form)
         {
             if (!user.IsStudent())

@@ -28,6 +28,7 @@ public partial class test
 
     }
 
+
     public string test_name { get; set; }
 
     public int test_code { get; set; }
@@ -45,6 +46,8 @@ public partial class test
     public int id_status { get; set; }
 
     public Nullable<System.DateTime> timestamps { get; set; }
+
+    public int type { get; set; }
 
 
 

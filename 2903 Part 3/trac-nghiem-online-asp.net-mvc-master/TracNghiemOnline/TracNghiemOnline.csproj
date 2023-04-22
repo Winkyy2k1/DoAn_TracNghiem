@@ -2357,7 +2357,7 @@
     <Content Include="Views\Student\DoingTest.cshtml" />
     <Content Include="Views\Student\PreviewTest.cshtml" />
     <Content Include="Views\Teacher\Preview.cshtml" />
-    <Content Include="Views\Shared\_LayoutTest.cshtml" />
+    <Content Include="Views\Shared\_LayoutTestStudent.cshtml" />
     <Content Include="Views\Shared\_LayoutTeacher.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -2367,6 +2367,8 @@
     <Content Include="Views\Admin\PreviewScore.cshtml" />
     <Content Include="Views\Teacher\Index2.cshtml" />
     <Content Include="Views\ImportExcel\AddTeacherExcel.cshtml" />
+    <Content Include="Views\Shared\_LayoutTestTeacher.cshtml" />
+    <Content Include="Views\Teacher\DeLuyenTap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
