@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var List = Model as List<QuestionViewModel>;
     var ListSubject = ViewBag.ListSubject as List<subject>;
+    var ListGrade = ViewBag.ListGrade;
     var stt = 0;
 }
 
@@ -90,8 +91,12 @@
                         }
                     </td>
                     <td style="text-align: left">
-                        Chương @item.question.unit <br />
-                        Môn @item.subject.subject_name</td>
+                       
+                        Môn học: @item.subject.subject_name <br />
+                        Chương số: @item.question.unit
+
+
+                    </td>
                     <td>
                         <p>
                             <label>
@@ -131,7 +136,18 @@
         </div>
         <div id="add_normal" class="col s12">
             @using (Html.BeginForm("AddQuestion", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
-            {
+            {   
+                <div class="input-field">
+                        <select name="id_grade" id="id_grade" required>
+                            <option disabled selected>Chọn Khối Học </option>
+                            @foreach (var item2 in ListGrade)
+                            {
+                                    <option value="@item2.id_grade">@item2.grade_name </option>
+                            }
+                        </select>
+                        <label> Chọn Khối học <span class="failed">(*)</span></label>
+                </div>
+
                 <div class="input-field">
                     <select name="id_subject">
                         @foreach (var subject in ListSubject)
@@ -139,7 +155,7 @@
                             <option value="@subject.id_subject">@subject.subject_name</option>
                         }
                     </select>
-                    <label>Môn</label>
+                    <label>Chọn Môn học </label>
                 </div>
                 <div class="input-field">
                     <input id="number" type="number" name="unit" value="1">

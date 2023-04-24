@@ -51,6 +51,8 @@ public partial class question
 
     public Nullable<System.DateTime> timestamps { get; set; }
 
+    public Nullable<int> id_grade { get; set; }
+
 
 
     public virtual subject subject { get; set; }
@@ -62,6 +64,8 @@ public partial class question
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<student_test_detail> student_test_detail { get; set; }
+
+    public virtual grade grade { get; set; }
 
 }
 

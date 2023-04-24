@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     var List = Model as List<TestViewModel>;
     var ListSubject = ViewBag.ListSubject;
+    var ListGrade = ViewBag.ListGrade;
     var stt = 0;
     string pass;
 }
@@ -89,6 +90,16 @@
                     <label for="email">Mật khẩu<span class="failed">(*)</span></label>
                     <input type="password" id="password" name="password" required>
                 </div>
+                 <div class="input-field">
+                        <select name="id_grade" id="id_grade" required>
+                            <option disabled selected>Chọn Khối Học </option>
+                            @foreach (var item2 in ListGrade)
+                            {
+                                    <option value="@item2.id_grade">@item2.grade_name </option>
+        }
+                        </select>
+                        <label> Chọn Khối học <span class="failed">(*)</span></label>
+                 </div>
                 <div class="input-field">
                     <select name="id_subject" id="id_subject" onchange="get_units(this.value)" required>
                         <option disabled selected>Chọn</option>
@@ -97,7 +108,7 @@
                             <option value="@item.id_subject">@item.subject_name</option>
                         }
                     </select>
-                    <label>Môn <span class="failed">(*)</span></label>
+                    <label>Chọn Môn Học <span class="failed">(*)</span></label>
                 </div>
                 <div id="list-unit">
 

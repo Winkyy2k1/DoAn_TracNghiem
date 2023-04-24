@@ -194,8 +194,10 @@ namespace TracNghiemOnline.Controllers
         }
         public ActionResult AddQuestionExcel()
         {
+            ViewBag.ListGrade = Model.GetGrades();
             ViewBag.ListSubject = Model.GetSubjects();
-            return View(Model.GetSubjects());
+            return View(Model.GetGrades());
+            //return View(Model.GetSubjects());
         }
         [HttpPost]
 
@@ -224,7 +226,9 @@ namespace TracNghiemOnline.Controllers
                     question q = new question();
 
                     q.id_subject = Convert.ToInt32(form["id_subject"]);
-                    q.unit= Convert.ToInt32(form["id_subject"]);
+                    q.unit= Convert.ToInt32(form["number"]);
+                    q.id_grade= Convert.ToInt32(form["id_grade"]);
+
                     q.img_content = "noimage.png";
                     q.content = ((Excel.Range)range.Cells[row, 2]).Text;
                     q.answer_a = ((Excel.Range)range.Cells[row, 3]).Text;                    
@@ -243,6 +247,7 @@ namespace TracNghiemOnline.Controllers
                             }
                             else
                              {
+                                ViewBag.ListGrade = Model.GetGrades();
                                 ViewBag.ListSubject = Model.GetSubjects();
                                 ViewBag.Error = "Đã tìm thấy lỗi trong file excel đầu vào. Vui lòng kiểm tra lại file.";
                                 return View("AddQuestionExcel");
@@ -259,6 +264,7 @@ namespace TracNghiemOnline.Controllers
                             db.SaveChanges();
                         }
                     }
+                    ViewBag.ListGrade = Model.GetGrades();
                     ViewBag.ListSubject = Model.GetSubjects();
                     ViewBag.Error = "Import danh sách câu hỏi thành công. ";
                     return View("AddQuestionExcel");
@@ -266,7 +272,7 @@ namespace TracNghiemOnline.Controllers
                 }
                else
                 {
-                   
+                    ViewBag.ListGrade = Model.GetGrades();
                     ViewBag.ListSubject = Model.GetSubjects();
                     ViewBag.Error = "Import Không thành công. Có lỗi xảy ra với file";
                     return View("AddQuestionExcel");
@@ -274,6 +280,7 @@ namespace TracNghiemOnline.Controllers
             }
             else
             {
+                ViewBag.ListGrade = Model.GetGrades();
                 ViewBag.ListSubject = Model.GetSubjects();
                 ViewBag.Error = "Chỉ hỗ trợ file excel có đuôi là .xls và .xlsx. ";
                 return View("AddQuestionExcel");

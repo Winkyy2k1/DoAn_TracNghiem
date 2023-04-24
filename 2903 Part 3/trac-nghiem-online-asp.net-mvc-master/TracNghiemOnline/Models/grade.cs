@@ -24,6 +24,10 @@ public partial class grade
 
         this.classes = new HashSet<@class>();
 
+        this.questions = new HashSet<question>();
+
+        this.tests = new HashSet<test>();
+
     }
 
 
@@ -38,6 +42,14 @@ public partial class grade
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<@class> classes { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<question> questions { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<test> tests { get; set; }
 
 }
 

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Thêm câu hỏi từ file Excel";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-
+    var ListGrade = ViewBag.ListGrade;
     var ListSubject = ViewBag.ListSubject;
 }
 <div class="title-content">
@@ -32,6 +32,18 @@
             {
                 <table width="650px">
                     <tr>
+                        <td> Chọn Khối học (*) </td>
+                        <td>
+                            <select name="id_grade" id="id_grade" style="display: block"; required >
+                                <option disabled selected>Chọn Khối Học </option>
+                                @foreach (var item2 in ListGrade)
+                                {
+                                    <option value="@item2.id_grade">@item2.grade_name </option>}
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
                         <td> Chọn Môn Học (*) </td>
                         <td>   
                             <select name="id_subject" style="display: block"; required>
@@ -46,7 +58,7 @@
                         <td> Nhập chương số (*) </td>
                         <td>
                             <div class="input-field">
-                                <input style="width: 80px; padding: 0px" id="number" type="number" name="unit" value="1">
+                                <input style="width: 80px; padding: 0px" id="number" type="number" name="number" value="1">
                             </div>
                         </td>
                     </tr>

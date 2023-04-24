@@ -10,14 +10,15 @@
 <!DOCTYPE html>
 <html>
 <style>
+
     search-table {
         background-color: #fefcfc;
-        margin: 10px 0;
+        margin: 20px 0;
     }
 
     .search-table td {
-        padding: 0 20px;
-        height: 80px;
+        padding: 10px 20px;
+        height: 100px;
         font-size: 18px;
     }
 
@@ -55,21 +56,19 @@
 </style>
 <body>
 
-    <div class="title-content">
-        <h4 style="margin: 0 20px; padding: 20px; font-family: monospace; color: #17a2b8 "> @ViewBag.Title </h4>
-        @if (TempData["status_id"] != null && (bool)TempData["status_id"])
-        {
-            <span class="timer success">@TempData["status"]</span> }
-        else
-        {
-            <span class="timer failed">@TempData["status"]</span>}
-    </div>
-
-    
-        <div>
+        <div class="title-content"  style="display: flex">
+            <h4 style="margin: 0 20px; padding: 20px; font-family: monospace; color: #17a2b8 "> @ViewBag.Title </h4>
+            @if (TempData["status_id"] != null && (bool)TempData["status_id"])
+            {
+                <span class="timer success">@TempData["status"]</span> }
+            else
+            {
+                <span class="timer failed">@TempData["status"]</span>}
+        </div>
+        <div >
          @{using (Html.BeginForm("Index", "Student", FormMethod.Post))
          {
-             <table class="search-table">
+             <table class="search-table" >
                  <tr>
                      <td width="200px" style="text-align:right"> <span> Tìm kiếm </span>  </td>
                      <td width="300px" >
@@ -95,8 +94,6 @@
        } }
             </div>
    
-
-
     <div class="content row col s12 reset-margin">
         @foreach (var item in ListTest)
         {

@@ -65,6 +65,7 @@
           <Property Name="answer_d" Type="ntext" Nullable="false" />
           <Property Name="correct_answer" Type="ntext" Nullable="false" />
           <Property Name="timestamps" Type="datetime" />
+          <Property Name="id_grade" Type="int" />
         </EntityType>
         <EntityType Name="quests_of_test">
           <Key>
@@ -188,6 +189,7 @@
           <Property Name="id_status" Type="int" Nullable="false" />
           <Property Name="type" Type="int" Nullable="false" />
           <Property Name="timestamps" Type="datetime" />
+          <Property Name="id_grade" Type="int" />
         </EntityType>
         <Association Name="FK__admins__id_permi__46E78A0C">
           <End Role="permissions" Type="Self.permissions" Multiplicity="1" />
@@ -321,6 +323,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_questions_grades">
+          <End Role="grades" Type="Self.grades" Multiplicity="0..1" />
+          <End Role="questions" Type="Self.questions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grades">
+              <PropertyRef Name="id_grade" />
+            </Principal>
+            <Dependent Role="questions">
+              <PropertyRef Name="id_grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_quests_of_test_questions">
           <End Role="questions" Type="Self.questions" Multiplicity="1" />
           <End Role="quests_of_test" Type="Self.quests_of_test" Multiplicity="*" />
@@ -366,6 +380,18 @@
             </Principal>
             <Dependent Role="classes">
               <PropertyRef Name="id_speciality" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tests_grades">
+          <End Role="grades" Type="Self.grades" Multiplicity="0..1" />
+          <End Role="tests" Type="Self.tests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grades">
+              <PropertyRef Name="id_grade" />
+            </Principal>
+            <Dependent Role="tests">
+              <PropertyRef Name="id_grade" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -428,6 +454,10 @@
             <End Role="grades" EntitySet="grades" />
             <End Role="classes" EntitySet="classes" />
           </AssociationSet>
+          <AssociationSet Name="FK_questions_grades" Association="Self.FK_questions_grades">
+            <End Role="grades" EntitySet="grades" />
+            <End Role="questions" EntitySet="questions" />
+          </AssociationSet>
           <AssociationSet Name="FK_quests_of_test_questions" Association="Self.FK_quests_of_test_questions">
             <End Role="questions" EntitySet="questions" />
             <End Role="quests_of_test" EntitySet="quests_of_test" />
@@ -443,6 +473,10 @@
           <AssociationSet Name="fk_speciality" Association="Self.fk_speciality">
             <End Role="specialities" EntitySet="specialities" />
             <End Role="classes" EntitySet="classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tests_grades" Association="Self.FK_tests_grades">
+            <End Role="grades" EntitySet="grades" />
+            <End Role="tests" EntitySet="tests" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -490,6 +524,8 @@
           <Property Name="grade_name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="timestamps" Type="DateTime" Precision="3" />
           <NavigationProperty Name="classes" Relationship="Self.fk_grade" FromRole="grades" ToRole="classes" />
+          <NavigationProperty Name="questions" Relationship="Model.FK_questions_grades" FromRole="grade" ToRole="question" />
+          <NavigationProperty Name="tests" Relationship="Model.FK_tests_grades" FromRole="grade" ToRole="test" />
         </EntityType>
         <EntityType Name="permission">
           <Key>
@@ -520,6 +556,8 @@
           <NavigationProperty Name="subject" Relationship="Self.FK__questions__id_su__5629CD9C" FromRole="questions" ToRole="subjects" />
           <NavigationProperty Name="quests_of_test" Relationship="Self.FK_quests_of_test_questions" FromRole="questions" ToRole="quests_of_test" />
           <NavigationProperty Name="student_test_detail" Relationship="Model.FK__student_t__id_qu__42ACE4D4" FromRole="question" ToRole="student_test_detail" />
+          <Property Name="id_grade" Type="Int32" />
+          <NavigationProperty Name="grade" Relationship="Model.FK_questions_grades" FromRole="question" ToRole="grade" />
         </EntityType>
         <EntityType Name="quests_of_test">
           <Key>
@@ -646,6 +684,8 @@
           <NavigationProperty Name="status" Relationship="Self.FK__tests__id_status__59FA5E80" FromRole="tests" ToRole="statuses" />
           <NavigationProperty Name="subject" Relationship="Self.FK__tests__id_subjec__59063A47" FromRole="tests" ToRole="subjects" />
           <Property Name="type" Type="Int32" Nullable="false" />
+          <Property Name="id_grade" Type="Int32" />
+          <NavigationProperty Name="grade" Relationship="Model.FK_tests_grades" FromRole="test" ToRole="grade" />
         </EntityType>
         <Association Name="FK__admins__id_permi__46E78A0C">
           <End Role="permissions" Type="Self.permission" Multiplicity="1" />
@@ -910,6 +950,14 @@
             <End Role="student" EntitySet="students" />
             <End Role="student_test_detail" EntitySet="student_test_detail" />
           </AssociationSet>
+          <AssociationSet Name="FK_questions_grades" Association="Model.FK_questions_grades">
+            <End Role="grade" EntitySet="grades" />
+            <End Role="question" EntitySet="questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tests_grades" Association="Model.FK_tests_grades">
+            <End Role="grade" EntitySet="grades" />
+            <End Role="test" EntitySet="tests" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="student_test_detail">
           <Key>
@@ -952,6 +1000,30 @@
             </Principal>
             <Dependent Role="student_test_detail">
               <PropertyRef Name="id_student" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_questions_grades">
+          <End Type="Model.grade" Role="grade" Multiplicity="0..1" />
+          <End Type="Model.question" Role="question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grade">
+              <PropertyRef Name="id_grade" />
+            </Principal>
+            <Dependent Role="question">
+              <PropertyRef Name="id_grade" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tests_grades">
+          <End Type="Model.grade" Role="grade" Multiplicity="0..1" />
+          <End Type="Model.test" Role="test" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="grade">
+              <PropertyRef Name="id_grade" />
+            </Principal>
+            <Dependent Role="test">
+              <PropertyRef Name="id_grade" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1013,6 +1085,7 @@
           <EntitySetMapping Name="questions">
             <EntityTypeMapping TypeName="Model.question">
               <MappingFragment StoreEntitySet="questions">
+                <ScalarProperty Name="id_grade" ColumnName="id_grade" />
                 <ScalarProperty Name="id_question" ColumnName="id_question" />
                 <ScalarProperty Name="id_subject" ColumnName="id_subject" />
                 <ScalarProperty Name="unit" ColumnName="unit" />
@@ -1126,6 +1199,7 @@
           <EntitySetMapping Name="tests">
             <EntityTypeMapping TypeName="Model.test">
               <MappingFragment StoreEntitySet="tests">
+                <ScalarProperty Name="id_grade" ColumnName="id_grade" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="test_name" ColumnName="test_name" />
                 <ScalarProperty Name="test_code" ColumnName="test_code" />

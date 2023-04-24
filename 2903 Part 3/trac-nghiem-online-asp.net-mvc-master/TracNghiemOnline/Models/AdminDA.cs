@@ -526,11 +526,12 @@ namespace TracNghiemOnline.Models
                                                  select new QuestionViewModel { question = x, subject = s }).ToList();
             return questions;
         }
-        public bool AddQuestion(int id_subject, int unit, string content, string img_content, string answer_a, string answer_b, string answer_c, string answer_d, string correct_answer)
+        public bool AddQuestion(int id_subject, int id_grade, int unit, string content, string img_content, string answer_a, string answer_b, string answer_c, string answer_d, string correct_answer)
         {
             var question = new question();
             question.id_subject = id_subject;
             question.unit = unit;
+            question.id_grade = id_grade;
             question.content = content;
             question.img_content = img_content;
             question.answer_a = answer_a;
@@ -630,21 +631,24 @@ namespace TracNghiemOnline.Models
             return tests;
         }
 
-        public List<UnitViewModel> GetUnits(int id)
+        public List<UnitViewModel> GetUnits(int id, int id_grade)
         {
+
             List<UnitViewModel> tests = db.questions
-                   .Where(p => p.id_subject == id)
+                   .Where(p => p.id_subject == id && p.id_grade == id_grade)
                    .GroupBy(p => p.unit)
                    .Select(g => new UnitViewModel { Unit = g.Key, Total = g.Count() }).ToList();
             return tests;
         }
-        public bool AddTest(string test_name, string password, int test_code, int id_subject, int total_question, int time_to_do, string note)
+
+        public bool AddTest(string test_name, string password, int test_code, int id_subject, int id_grade, int total_question, int time_to_do, string note)
         {
             var test = new test();
             test.test_name = test_name;
             test.password = password;
             test.test_code = test_code;
             test.id_subject = id_subject;
+            test.id_grade = id_grade;
             test.id_status = 1;   // 1: Open 2: Close
             test.type = 1; // 1 Đề thi. 2 Đề luyện tập. 
             test.total_questions = total_question;
@@ -663,13 +667,14 @@ namespace TracNghiemOnline.Models
             return true;
         }
 
-        public bool AddDeLuyenTap(string test_name, string password, int test_code, int id_subject, int total_question, int time_to_do, string note)
+        public bool AddDeLuyenTap(string test_name, string password, int test_code, int id_subject, int id_grade, int total_question, int time_to_do, string note)
         {
             var test = new test();
             test.test_name = test_name;
             test.password = password;
             test.test_code = test_code;
             test.id_subject = id_subject;
+            test.id_grade = id_grade;
             test.id_status = 1;   // 1: Open 2: Close
             test.type = 2; // 1 Đề thi. 2 Đề luyện tập. 
             test.total_questions = total_question;
@@ -737,10 +742,10 @@ namespace TracNghiemOnline.Models
             }
             return true;
         }
-        public List<question> GetQuestionsByUnit(int id_subject, int unit, int quest_of_unit)
+        public List<question> GetQuestionsByUnit(int id_subject, int id_grade, int unit, int quest_of_unit)
         {
             List<question> q = (from x in db.questions
-                                where x.id_subject == id_subject && x.unit == unit
+                                where x.id_subject == id_subject && x.unit == unit && x.id_grade == id_grade
                                 select x).OrderBy(x => Guid.NewGuid()).Take(quest_of_unit).ToList();
             return q;
         }

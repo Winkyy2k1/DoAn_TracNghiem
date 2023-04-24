@@ -36,6 +36,8 @@
         <EntityTypeShape EntityType="Model.student_test_detail" Width="1.875" PointX="13.5" PointY="1" />
         <AssociationConnector Association="Model.FK__student_t__id_qu__42ACE4D4" />
         <AssociationConnector Association="Model.FK__student_t__id_st__41B8C09B" />
+        <AssociationConnector Association="Model.FK_questions_grades" />
+        <AssociationConnector Association="Model.FK_tests_grades" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

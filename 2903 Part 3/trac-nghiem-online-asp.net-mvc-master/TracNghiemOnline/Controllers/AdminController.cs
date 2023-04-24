@@ -755,6 +755,7 @@ namespace TracNghiemOnline.Controllers
                 return View("Error");
             Model.UpdateLastSeen("Quản Lý Câu Hỏi", Url.Action("QuestionManager"));
             ViewBag.ListSubject = Model.GetSubjects();
+            ViewBag.ListGrade = Model.GetGrades();
             return View(Model.GetQuestions());
         }
         [HttpPost]
@@ -764,6 +765,7 @@ namespace TracNghiemOnline.Controllers
                 return View("Error");
             Model.UpdateLastSeen("Thêm Câu Hỏi", Url.Action("AddQuestion"));
             int id_subject = Convert.ToInt32(form["id_subject"]);
+            int id_grade = Convert.ToInt32(form["id_grade"]);
             int unit = Convert.ToInt32(form["unit"]);
             string content = form["content"];
             string[] answer = new string[] {
@@ -805,7 +807,7 @@ namespace TracNghiemOnline.Controllers
                 }
 
             } catch (Exception) { }
-            bool add = Model.AddQuestion(id_subject, unit, content, img_content, answer_a, answer_b, answer_c, answer_d, correct_answer);
+            bool add = Model.AddQuestion(id_subject, id_grade, unit, content, img_content, answer_a, answer_b, answer_c, answer_d, correct_answer);
             if (add)
             {
                 TempData["status_id"] = true;
@@ -947,6 +949,7 @@ namespace TracNghiemOnline.Controllers
             if (!user.IsAdmin())
                 return View("Error");
             Model.UpdateLastSeen("Kho đề thi", Url.Action("TestManager"));
+            ViewBag.ListGrade = Model.GetGrades();
             ViewBag.ListSubject = Model.GetSubjects();
             return View(Model.GetTests());
         }
@@ -956,14 +959,16 @@ namespace TracNghiemOnline.Controllers
             if (!user.IsAdmin())
                 return View("Error");
             Model.UpdateLastSeen("Kho đề luyện tập", Url.Action("DeLTManager"));
+            ViewBag.ListGrade = Model.GetGrades();
             ViewBag.ListSubject = Model.GetSubjects();
             return View(Model.GetDeLuyenTap());
         }
-
-        public JsonResult GetJsonUnits(int id)
+        public JsonResult GetJsonUnits(int id, int id_grade)
         {
-            return Json(Model.GetUnits(id), JsonRequestBehavior.AllowGet);
+            return Json(Model.GetUnits(id, id_grade), JsonRequestBehavior.AllowGet);
         }
+
+       
         public ActionResult AddTest(FormCollection form)
         {
             if (!user.IsAdmin())
@@ -977,22 +982,23 @@ namespace TracNghiemOnline.Controllers
             Random rnd = new Random();
             int test_code = rnd.Next(111111,999999);
             int id_subject = Convert.ToInt32(form["id_subject"]);
+            int id_grade = Convert.ToInt32(form["id_grade"]);
             int total_question = Convert.ToInt32(form["total_question"]);
             int time_to_do = Convert.ToInt32(form["time_to_do"]);
             string note = "";
             if (form["note"]!="")
                 note = form["note"];
-            bool add = Model.AddTest(test_name, password, test_code, id_subject, total_question, time_to_do, note);
+            bool add = Model.AddTest(test_name, password, test_code, id_subject, id_grade, total_question, time_to_do, note);
             if (add)
             {
                 TempData["status_id"] = true;
                 TempData["status"] = "Thêm Thành Công";
                 //tạo bộ câu hỏi cho đề thi
-                List<UnitViewModel> list_unit = Model.GetUnits(id_subject);
+                List<UnitViewModel> list_unit = Model.GetUnits(id_subject, id_grade);
                 foreach (UnitViewModel unit in list_unit)
                 {
                     int quest_of_unit = Convert.ToInt32(form["unit-" + unit.Unit]);
-                    List<question> list_question = Model.GetQuestionsByUnit(id_subject, unit.Unit, quest_of_unit);
+                    List<question> list_question = Model.GetQuestionsByUnit(id_subject, id_grade, unit.Unit, quest_of_unit);
                     foreach (question item in list_question)
                     {
                         Model.AddQuestionsToTest(test_code,item.id_question);
@@ -1020,22 +1026,23 @@ namespace TracNghiemOnline.Controllers
             Random rnd = new Random();
             int test_code = rnd.Next(111111, 999999);
             int id_subject = Convert.ToInt32(form["id_subject"]);
+            int id_grade = Convert.ToInt32(form["id_grade"]);
             int total_question = Convert.ToInt32(form["total_question"]);
             int time_to_do = Convert.ToInt32(form["time_to_do"]);
             string note = "";
             if (form["note"] != "")
                 note = form["note"];
-            bool add = Model.AddDeLuyenTap(test_name, password, test_code, id_subject, total_question, time_to_do, note);
+            bool add = Model.AddDeLuyenTap(test_name, password, test_code, id_subject, id_grade, total_question, time_to_do, note);
             if (add)
             {
                 TempData["status_id"] = true;
                 TempData["status"] = "Thêm Thành Công";
                 //tạo bộ câu hỏi cho đề thi
-                List<UnitViewModel> list_unit = Model.GetUnits(id_subject);
+                List<UnitViewModel> list_unit = Model.GetUnits(id_subject, id_grade);
                 foreach (UnitViewModel unit in list_unit)
                 {
                     int quest_of_unit = Convert.ToInt32(form["unit-" + unit.Unit]);
-                    List<question> list_question = Model.GetQuestionsByUnit(id_subject, unit.Unit, quest_of_unit);
+                    List<question> list_question = Model.GetQuestionsByUnit(id_subject, id_grade, unit.Unit, quest_of_unit);
                     foreach (question item in list_question)
                     {
                         Model.AddQuestionsToTest(test_code, item.id_question);

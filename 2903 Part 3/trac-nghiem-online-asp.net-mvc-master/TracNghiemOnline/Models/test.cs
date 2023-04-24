@@ -49,6 +49,8 @@ public partial class test
 
     public int type { get; set; }
 
+    public Nullable<int> id_grade { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -62,6 +64,8 @@ public partial class test
     public virtual status status { get; set; }
 
     public virtual subject subject { get; set; }
+
+    public virtual grade grade { get; set; }
 
 }
 
