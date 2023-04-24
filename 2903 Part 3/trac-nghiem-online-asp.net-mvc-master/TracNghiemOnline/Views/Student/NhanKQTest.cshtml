@@ -1,0 +1,86 @@
+﻿@using TracNghiemOnline.Models;
+@{
+    var list = Model as List<StudentQuestViewModel>;
+    ViewBag.Title = "NhanKQTest";
+    var score = ViewBag.score as score;
+    Layout = "~/Views/Shared/_LayoutTestStudent.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        @ViewBag.Title
+    </title>
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="/Assets/js/materialize.min.js"></script>
+    
+</head>
+
+<body>
+   <div >
+       <table>
+           <tr>
+               <td width="600px">
+                   @{ if (@score.score_number >= 5)
+                       {<img style="margin-left: 30px" src="~/Assets/LandingPage/img/happy.png" alt="Alternate Text" />}
+
+                       else
+                       {
+                           {<img style="margin-left: 50px; width: 500px" src="~/Assets/LandingPage/img/cry.png" alt="Alternate Text" />}
+                       }
+                   }
+               </td>
+               <td>
+                   <h3 style="font-family: cursive; color: #17a2b8"> Bạn đã hoàn thành bài thi. </h3>
+                    
+                   <div class="" style="padding: 10px 20px; width: 80%">
+                       <hr/>
+                       <span class="title">Số câu trả lời đúng: <b>@score.detail</b> câu. </span><br />
+                       <span class="title">
+                           Điểm đạt được:
+                           @{ if (@score.score_number >= 5)
+                               { <b style="color: forestgreen; font-size: 20px;">@score.score_number</b>
+                               <br />
+                               <span class="title" style="text-indent: -20px;">  Trạng Thái: <span style="font-size: 20px; color: forestgreen "> Đạt</span> </span> }
+
+                           else
+                           { <b style="color:red; font-size:20px;">@score.score_number</b>
+                           <br />
+                           <span class="title" style="text-indent: -20px;">  Trạng Thái: <span style="color: red; font-size: 20px;"> Chưa Đạt</span> </span> } }
+
+                       </span>
+                       <hr />
+                       <div>
+
+                           <a class="title" href="@Url.Action("Index")"> Quay Lại Danh sách đề thi </a>
+                       </div>
+
+                   </div>
+               </td>
+           </tr>
+       </table>
+   </div>
+
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

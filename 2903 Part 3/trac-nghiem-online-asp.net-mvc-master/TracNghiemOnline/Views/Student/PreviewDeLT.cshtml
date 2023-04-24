@@ -2,12 +2,12 @@
 
 @{
     var list = Model as List<StudentQuestViewModel>;
-    ViewBag.Title = "Chi Tiết Bài Thi Có Mã Đề : " + list.First().test.test_code;
+    ViewBag.Title = "Chi Tiết Đề luyện tập Mã Đề : " + list.First().test.test_code;
     var score = ViewBag.score as score;
     Layout = "~/Views/Shared/_LayoutTestStudent.cshtml";
 }
 <div class="title-content">
-    <a class="title" href="@Url.Action("Index")">Quay Lại</a>
+    <a class="title" href="@Url.Action("DeLT_Student")" >Quay Lại</a>
     <span class="title">@ViewBag.Title</span>
 </div>
 <div class="content row col s12 reset-margin" style="padding: 10px 20px">

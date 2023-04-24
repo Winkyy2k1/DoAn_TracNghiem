@@ -28,6 +28,17 @@ namespace TracNghiemOnline.Models
             List<TestViewModel> tests = (from x in db.tests
                                          join s in db.subjects on x.id_subject equals s.id_subject
                                          join stt in db.statuses on x.id_status equals stt.id_status
+                                         where x.type == 1
+                                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            return tests;
+        }
+
+        public List<TestViewModel> GetDeLT()
+        {
+            List<TestViewModel> tests = (from x in db.tests
+                                         join s in db.subjects on x.id_subject equals s.id_subject
+                                         join stt in db.statuses on x.id_status equals stt.id_status
+                                         where x.type == 2
                                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             return tests;
         }
@@ -40,7 +51,7 @@ namespace TracNghiemOnline.Models
                 tests = (from x in db.tests
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
-                         where s.id_subject == id_subject1
+                         where s.id_subject == id_subject1 && x.type == 1 
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)
@@ -49,6 +60,25 @@ namespace TracNghiemOnline.Models
             }
             return tests;
         }
+
+        public List<TestViewModel> GetDeLTBySubject(int id_subject1)
+        {
+            List<TestViewModel> tests = new List<TestViewModel>();
+            try
+            {
+                tests = (from x in db.tests
+                         join s in db.subjects on x.id_subject equals s.id_subject
+                         join stt in db.statuses on x.id_status equals stt.id_status
+                         where s.id_subject == id_subject1 && x.type == 2
+                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return tests;
+        }
+
 
         public List<TestViewModel> GetDashboardSubject_Name(int id_subject1, string name_test)
         {
@@ -59,7 +89,7 @@ namespace TracNghiemOnline.Models
                 tests = (from x in db.tests
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
-                         where (s.id_subject == id_subject1) && (x.test_name.ToLower().Contains(name_test))
+                         where (s.id_subject == id_subject1) && (x.test_name.ToLower().Contains(name_test))  &&  ( x.type == 1 )
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)
@@ -68,6 +98,25 @@ namespace TracNghiemOnline.Models
             }
             return tests;
         }
+        public List<TestViewModel> GetDeLTSubject_Name(int id_subject1, string name_test)
+        {
+            if (!String.IsNullOrEmpty(name_test)) { name_test = name_test.ToLower().Trim(); }
+            List<TestViewModel> tests = new List<TestViewModel>();
+            try
+            {
+                tests = (from x in db.tests
+                         join s in db.subjects on x.id_subject equals s.id_subject
+                         join stt in db.statuses on x.id_status equals stt.id_status
+                         where (s.id_subject == id_subject1) && (x.test_name.ToLower().Contains(name_test)) && (x.type == 2)
+                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return tests;
+        }
+
 
         public List<TestViewModel> GetDashboardByName(string name_test)
         {
@@ -79,7 +128,7 @@ namespace TracNghiemOnline.Models
                 tests = (from x in db.tests
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
-                         where x.test_name.ToLower().Contains(name_test)
+                         where x.test_name.ToLower().Contains(name_test) && (x.type == 1) 
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)
@@ -89,6 +138,25 @@ namespace TracNghiemOnline.Models
             return tests;
         }
 
+        public List<TestViewModel> GetDeLTByName(string name_test)
+        {
+            if (!String.IsNullOrEmpty(name_test)) { name_test = name_test.ToLower().Trim(); }
+
+            List<TestViewModel> tests = new List<TestViewModel>();
+            try
+            {
+                tests = (from x in db.tests
+                         join s in db.subjects on x.id_subject equals s.id_subject
+                         join stt in db.statuses on x.id_status equals stt.id_status
+                         where x.test_name.ToLower().Contains(name_test) && (x.type == 2)
+                         select new TestViewModel { test = x, subject = s, status = stt }).ToList();
+            }
+            catch (Exception e1)
+            {
+                Console.WriteLine(e1);
+            }
+            return tests;
+        }
 
         public test GetTest(int test_code)
         {
@@ -141,11 +209,40 @@ namespace TracNghiemOnline.Models
                 StudentTest.answer_b = answer[1];
                 StudentTest.answer_c = answer[2];
                 StudentTest.answer_d = answer[3];
+                StudentTest.type = 1;
+                StudentTest.timestamps = DateTime.Now;
                 db.student_test_detail.Add(StudentTest);
                 db.SaveChanges();
             }
 
         }
+
+        public void CreateStudentQuestionDELT(int code)
+        {
+            List<quests_of_test> qs = (from x in db.quests_of_test
+                                       where x.test_code == code
+                                       select x).OrderBy(x => Guid.NewGuid()).ToList();
+            foreach (var item in qs)
+            {
+                var StudentTest = new student_test_detail();
+                StudentTest.id_question = item.id_question;
+                StudentTest.test_code = code;
+                StudentTest.id_student = user.ID;
+                question q = db.questions.SingleOrDefault(x => x.id_question == item.id_question);
+                string[] answer = { q.answer_a, q.answer_b, q.answer_c, q.answer_d };
+                answer = ShuffleArray.Randomize(answer);
+                StudentTest.answer_a = answer[0];
+                StudentTest.answer_b = answer[1];
+                StudentTest.answer_c = answer[2];
+                StudentTest.answer_d = answer[3];
+                StudentTest.type = 2; 
+                StudentTest.timestamps = DateTime.Now; 
+                db.student_test_detail.Add(StudentTest);
+                db.SaveChanges();
+            }
+
+        }
+
         public List<StudentQuestViewModel> GetListQuest(int test_code)
             {
             List<StudentQuestViewModel> list = new List<StudentQuestViewModel>();
@@ -182,9 +279,24 @@ namespace TracNghiemOnline.Models
             s.score_number = score;
             s.detail = detail;
             s.time_finish = DateTime.Now;
+            s.type = 1; 
             db.scores.Add(s);
             db.SaveChanges();
         }
+
+        public void InsertScoreDELT(double score, string detail)
+        {
+            var s = new score();
+            s.id_student = user.ID;
+            s.test_code = user.TESTCODE;
+            s.score_number = score;
+            s.detail = detail;
+            s.time_finish = DateTime.Now;
+            s.type = 2;
+            db.scores.Add(s);
+            db.SaveChanges();
+        }
+
         public void FinishTest()
         {
             var update = (from x in db.students where x.id_student == user.ID select x).Single();

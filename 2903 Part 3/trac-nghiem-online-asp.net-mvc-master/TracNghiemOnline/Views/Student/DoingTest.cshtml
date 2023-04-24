@@ -3,7 +3,7 @@
 @{
     var list = Model as List<StudentQuestViewModel>;
     ViewBag.Title = "Làm Bài Thi có mã đề: "+ list.First().test.test_code;
-    Layout = "~/Views/Shared/_LayoutTest.cshtml";
+    Layout = "~/Views/Shared/_LayoutTestStudent.cshtml";
 }
 <div class="title-content">
     <span class="title" style="padding-left: 115px;">@ViewBag.Title</span>
@@ -28,83 +28,76 @@
         }
     </div>
     <div class="testing-right">
-        @{ 
-            int x = 1;
-            foreach(var item in list)       
+        @{ int x = 1;
+            foreach (var item in list)
             {
-                <div id="quest-@x" class="item-quest">
-                    <div class="quest-title">Câu @x :</div>
-                    <div class="quest-content">
-                        <span>@item.question.content</span>
-                        @if(!item.question.img_content.Equals("noimage.png"))
-                        {
-                            <small class="title">(Câu hỏi có nội dung ảnh)</small>
-                            <img src="~/Assets/img_questions/@item.question.img_content" style="max-width:700px"/>
-                        }
-                    </div>
-                    <div class="quest-answer">
-                        <p>
-                            <label>
-                                @if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.student_test.answer_a.Trim()))
-                                {
-                                    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_a.Trim()" checked />
-                                }
-                                else
-                                {
-                                    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_a.Trim()" />
-                                }
-                                <span>@item.student_test.answer_a</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                @if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.student_test.answer_b.Trim()))
-                                {
-                                    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_b.Trim()" checked />
-                                }
-                                else
-                                {
-                                    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_b.Trim()" />
-                                }
-                                <span>@item.student_test.answer_b</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                @if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.student_test.answer_c.Trim()))
-                                {
-                                    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_c.Trim()" checked />
-                                }
-                                else
-                                {
-                                    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_c.Trim()" />
-                                }
-                                <span>@item.student_test.answer_c</span>
-                            </label>
-                        </p>
-                        <p>
-                            <label>
-                                @if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.student_test.answer_d.Trim()))
-                                {
-                                    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_d.Trim()" checked />
-                                }
-                                else
-                                {
-                                    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_d.Trim()" />
-                                }
-                                <span>@item.student_test.answer_d</span>
-                            </label>
-                        </p>
-                    </div>
-                </div>
-                x = x + 1;
-            }
-        }
-        
-    <a href="@Url.Action("SubmitTest")" class="btn flat" style="margin-left: 40%;width: 30%;margin-top: 20px;margin-bottom: 10px;" onclick="return confirm('Bạn xác nhận nộp bài?')"> Nộp Bài </a>
+    <div id="quest-@x" class="item-quest">
+        <div class="quest-title">Câu @x :</div>
+        <div class="quest-content">
+            <span>@item.question.content</span>
+            @if (!item.question.img_content.Equals("noimage.png"))
+            {
+    <small class="title">(Câu hỏi có nội dung ảnh)</small>
+                        <img src="~/Assets/img_questions/@item.question.img_content" style="max-width:700px" />}
+        </div>
+        <div class="quest-answer">
+            <p>
+                <label>
+                    @if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.student_test.answer_a.Trim()))
+                    {
+    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_a.Trim()" checked /> }
+else
+{
+    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_a.Trim()" />}
+                    <span>@item.student_test.answer_a</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    @if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.student_test.answer_b.Trim()))
+                    {
+    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_b.Trim()" checked /> }
+else
+{
+    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_b.Trim()" />}
+                    <span>@item.student_test.answer_b</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    @if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.student_test.answer_c.Trim()))
+                    {
+    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_c.Trim()" checked /> }
+else
+{
+    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_c.Trim()" />}
+                    <span>@item.student_test.answer_c</span>
+                </label>
+            </p>
+            <p>
+                <label>
+                    @if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.student_test.answer_d.Trim()))
+                    {
+    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_d.Trim()" checked /> }
+else
+{
+    <input name="@item.question.id_question" data-idquest="@item.question.id_question" type="radio" data-stt="@x" value="@item.student_test.answer_d.Trim()" />}
+                    <span>@item.student_test.answer_d</span>
+                </label>
+            </p>
+        </div>
+    </div> x = x + 1;
+} }
+
+        <a href="@Url.Action("SubmitTest")" class="btn flat" style="margin-left: 40%;width: 30%;margin-top: 20px;margin-bottom: 10px;" onclick="return confirm('Bạn xác nhận nộp bài?')"> Nộp Bài </a>
+        <br />
+
+       
     </div>
 </div>
 <script>
+
+   
     var min = @ViewBag.min;
     var sec = @ViewBag.sec;
     countdown();

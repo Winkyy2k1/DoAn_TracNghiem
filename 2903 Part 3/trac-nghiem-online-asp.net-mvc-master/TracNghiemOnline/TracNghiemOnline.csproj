@@ -1946,6 +1946,8 @@
     <Content Include="Assets\LandingPage\css\style.min.css" />
     <Content Include="Assets\LandingPage\img\404-removebg-preview.png" />
     <Content Include="Assets\LandingPage\img\404.jpg" />
+    <Content Include="Assets\LandingPage\img\404_2.png" />
+    <Content Include="Assets\LandingPage\img\404_3.png" />
     <Content Include="Assets\LandingPage\img\about-1.jpg" />
     <Content Include="Assets\LandingPage\img\about-2.jpg" />
     <Content Include="Assets\LandingPage\img\anh_dang_nhap.jpg" />
@@ -1955,8 +1957,11 @@
     <Content Include="Assets\LandingPage\img\class-1.jpg" />
     <Content Include="Assets\LandingPage\img\class-2.jpg" />
     <Content Include="Assets\LandingPage\img\class-3.jpg" />
+    <Content Include="Assets\LandingPage\img\cry.png" />
     <Content Include="Assets\LandingPage\img\detail.jpg" />
+    <Content Include="Assets\LandingPage\img\happy.png" />
     <Content Include="Assets\LandingPage\img\header.png" />
+    <Content Include="Assets\LandingPage\img\login_1.png" />
     <Content Include="Assets\LandingPage\img\logo.jpg" />
     <Content Include="Assets\LandingPage\img\logo2.jpg" />
     <Content Include="Assets\LandingPage\img\portfolio-3.jpg" />
@@ -2365,11 +2370,14 @@
     <Content Include="Views\ImportExcel\AddStudentExcel.cshtml" />
     <Content Include="Views\ImportExcel\AddQuestionExcel.cshtml" />
     <Content Include="Views\Admin\PreviewScore.cshtml" />
-    <Content Include="Views\Teacher\Index2.cshtml" />
     <Content Include="Views\ImportExcel\AddTeacherExcel.cshtml" />
     <Content Include="Views\Shared\_LayoutTestTeacher.cshtml" />
     <Content Include="Views\Teacher\DeLuyenTap.cshtml" />
     <Content Include="Views\Admin\DeLTManager.cshtml" />
+    <Content Include="Views\Student\DeLT_Student.cshtml" />
+    <Content Include="Views\Student\DoingDeLT.cshtml" />
+    <Content Include="Views\Student\PreviewDeLT.cshtml" />
+    <Content Include="Views\Student\NhanKQTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

@@ -38,6 +38,8 @@ public partial class student_test_detail
 
     public int test_code { get; set; }
 
+    public Nullable<int> type { get; set; }
+
 
 
     public virtual question question { get; set; }

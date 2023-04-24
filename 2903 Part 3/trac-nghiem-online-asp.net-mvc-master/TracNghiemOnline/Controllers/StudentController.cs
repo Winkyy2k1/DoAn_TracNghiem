@@ -56,6 +56,49 @@ namespace TracNghiemOnline.Controllers
             }
         }
 
+        public ActionResult DeLT_Student(FormCollection form)
+        {
+            if (!user.IsStudent())
+                return View("Error");
+            if (user.IsTesting())
+                return RedirectToAction("DoingTest");
+            Model.UpdateLastLogin();
+            Model.UpdateLastSeen("Trang Chủ - đề LT", Url.Action("DeLT_Student"));
+            //int id_subject = Convert.ToInt32(form["txtSearch"]);
+
+            string text = form["txtSearch"];      // text tìm kiếm 
+            int sub_droplist = Convert.ToInt32(form["id_subject"]);   // droplist 
+
+            if (sub_droplist == 0 && String.IsNullOrEmpty(text))
+            {
+                ViewBag.ListSubject = Model.GetSubjects();
+                ViewBag.score = Model.GetStudentTestcode();
+                return View(Model.GetDeLT());
+            }
+            else
+            {
+                if (String.IsNullOrEmpty(text) && sub_droplist > 0)
+                {
+                    ViewBag.ListSubject = Model.GetSubjects();
+                    ViewBag.score = Model.GetStudentTestcode();
+                    return View(Model.GetDeLTBySubject(sub_droplist));
+                }
+                else
+                {
+                    if (!String.IsNullOrEmpty(text) && sub_droplist == 0)
+                    {
+                        ViewBag.ListSubject = Model.GetSubjects();
+                        ViewBag.score = Model.GetStudentTestcode();
+                        return View(Model.GetDeLTByName(text));
+                    }
+
+                    ViewBag.ListSubject = Model.GetSubjects();
+                    ViewBag.score = Model.GetStudentTestcode();
+                    return View(Model.GetDeLTSubject_Name(sub_droplist, text));
+                }
+            }
+        }
+
         [HttpPost]
         public ActionResult CheckPassword(FormCollection form)
         {
@@ -83,6 +126,21 @@ namespace TracNghiemOnline.Controllers
                 return RedirectToAction("DoingTest");
             }
         }
+        public ActionResult CheckDeLT(FormCollection form)
+        {
+            if (!user.IsStudent())
+                return View("Error");
+            if (user.IsTesting())
+                return RedirectToAction("DoingDeLT");
+
+            string test_code = form["test_code"];
+            int code = Convert.ToInt32(test_code);
+
+            Model.CreateStudentQuestionDELT(code);
+            Model.UpdateStatus(code, Model.GetTest(code).time_to_do + ":00");
+            return RedirectToAction("DoingDeLT");            
+        }
+
         public ActionResult DoingTest()
         {
             if (!user.IsStudent())
@@ -97,6 +155,22 @@ namespace TracNghiemOnline.Controllers
             }
             return View(Model.GetListQuest(user.TESTCODE));
         }
+
+        public ActionResult DoingDeLT()
+        {
+            if (!user.IsStudent())
+                return View("Error");
+            if (!user.IsTesting())
+                return View("Error");
+            if (user.TIME != null)
+            {
+                string[] time = Regex.Split(user.TIME, ":");
+                ViewBag.min = time[0];
+                ViewBag.sec = time[1];
+            }         
+            return View(Model.GetListQuest(user.TESTCODE));
+        }
+
         public ActionResult SubmitTest()
         {
             if (!user.IsStudent())
@@ -117,8 +191,44 @@ namespace TracNghiemOnline.Controllers
             string detail = count_correct + "/" + total_quest;
             Model.InsertScore(score, detail);
             Model.FinishTest();
-            return RedirectToAction("PreviewTest/" + test_code);
+            return RedirectToAction("NhanKQTest/" + test_code);
         }
+
+        public ActionResult SubmitDeLT()
+        {
+            if (!user.IsStudent())
+                return View("Error");
+            if (!user.IsTesting())
+                return View("Error");
+            var list = Model.GetListQuest(user.TESTCODE);
+            int total_quest = list.First().test.total_questions; 
+            int test_code = list.First().test.test_code;
+            double coefficient = 10.0 / (double)total_quest;
+            int count_correct = 0;
+            foreach (var item in list)
+            {
+                if (item.student_test.student_answer != null && item.student_test.student_answer.Trim().Equals(item.question.correct_answer.Trim()))
+                    count_correct++;
+            }
+            double score = coefficient * count_correct;
+            string detail = count_correct + "/" + total_quest;
+            Model.InsertScoreDELT(score, detail);
+            Model.FinishTest();
+            return RedirectToAction("PreviewDeLT/" + test_code);
+        }
+
+        public ActionResult NhanKQTest(int id)
+        {
+            if (!user.IsStudent())
+                return View("Error");
+            if (user.IsTesting())
+                return RedirectToAction("DoingTest");
+            if (Model.GetStudentTestcode().IndexOf(id) == -1)
+                return View("Error");
+            ViewBag.score = Model.GetScore(id);
+            return View(Model.GetListQuest(id));
+        }
+
         public ActionResult PreviewTest(int id)
         {
             if (!user.IsStudent())
@@ -129,7 +239,21 @@ namespace TracNghiemOnline.Controllers
                 return View("Error");
             ViewBag.score = Model.GetScore(id);
             return View(Model.GetListQuest(id));
-        } 
+        }
+
+        public ActionResult PreviewDeLT(int id)
+        {
+            if (!user.IsStudent())
+                return View("Error");
+            if (user.IsTesting())
+                return RedirectToAction("DoingDeLT");
+            if (Model.GetStudentTestcode().IndexOf(id) == -1)
+                return View("Error");
+            ViewBag.score = Model.GetScore(id);
+            return View(Model.GetListQuest(id));
+        }
+
+
         [HttpPost]
         public void UpdateTiming(FormCollection form)
         {

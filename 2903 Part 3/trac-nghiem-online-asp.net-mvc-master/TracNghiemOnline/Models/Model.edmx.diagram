@@ -5,19 +5,19 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="25a2ae9f773f45ad8d4c83280c99ffab" Name="Diagram1" ZoomLevel="63">
-        <EntityTypeShape EntityType="Model.admin" Width="1.5" PointX="13.875" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.admin" Width="1.5" PointX="14.375" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.class" Width="1.5" PointX="4.75" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.grade" Width="1.375" PointX="2.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.permission" Width="1.5" PointX="11.625" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.permission" Width="1.5" PointX="11.875" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.question" Width="1.5" PointX="1.625" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.quests_of_test" Width="1.5" PointX="5.125" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.score" Width="1.5" PointX="16.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.quests_of_test" Width="1.5" PointX="5" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.score" Width="1.5" PointX="16.375" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.speciality" Width="1.5" PointX="9.625" PointY="5.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.status" Width="1.5" PointX="8.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.status" Width="1.5" PointX="7.75" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.student" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.subject" Width="1.5" PointX="4.625" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.teacher" Width="1.5" PointX="16.875" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.test" Width="1.5" PointX="10.75" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.test" Width="1.5" PointX="10.875" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="Model.FK__admins__id_permi__46E78A0C" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__students__id_cla__5070F446" ManuallyRouted="false" />
         <AssociationConnector Association="Model.fk_grade" ManuallyRouted="false" />
@@ -33,7 +33,7 @@
         <AssociationConnector Association="Model.FK__teachers__id_spe__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__tests__id_status__59FA5E80" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FK__tests__id_subjec__59063A47" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Model.student_test_detail" Width="1.875" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.student_test_detail" Width="1.875" PointX="13.5" PointY="1" />
         <AssociationConnector Association="Model.FK__student_t__id_qu__42ACE4D4" />
         <AssociationConnector Association="Model.FK__student_t__id_st__41B8C09B" />
       </Diagram>

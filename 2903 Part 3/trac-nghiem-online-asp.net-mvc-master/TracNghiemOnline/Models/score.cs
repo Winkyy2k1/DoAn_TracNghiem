@@ -30,6 +30,8 @@ public partial class score
 
     public string detail { get; set; }
 
+    public Nullable<int> type { get; set; }
+
 
 
     public virtual student student { get; set; }
