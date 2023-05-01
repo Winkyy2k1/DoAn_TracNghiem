@@ -60,10 +60,10 @@
             <h4 style="margin: 0 20px; padding: 20px; font-family: monospace; color: #17a2b8 "> @ViewBag.Title </h4>
             @if (TempData["status_id"] != null && (bool)TempData["status_id"])
             {
-                <span class="timer success">@TempData["status"]</span> }
+                <span class="timer success" style="margin: auto 0; text-indent: 30%; width: 1000px; ">@TempData["status"]</span> }
             else
             {
-                <span class="timer failed">@TempData["status"]</span>}
+                <span class="timer failed" style="margin: auto 0; text-indent: 30%; width: 1000px;">@TempData["status"]</span>}
         </div>
         <div >
          @{using (Html.BeginForm("Index", "Student", FormMethod.Post))

@@ -103,7 +103,7 @@ namespace TracNghiemOnline.Controllers
                 return View("AddTeacherExcel");
             }
         }
-        [HttpPost]
+       
 
         public ActionResult AddStudentExcel()
         {
