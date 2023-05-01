@@ -1961,6 +1961,7 @@
     <Content Include="Assets\LandingPage\img\detail.jpg" />
     <Content Include="Assets\LandingPage\img\happy.png" />
     <Content Include="Assets\LandingPage\img\header.png" />
+    <Content Include="Assets\LandingPage\img\lienhe.png" />
     <Content Include="Assets\LandingPage\img\login_1.png" />
     <Content Include="Assets\LandingPage\img\logo.jpg" />
     <Content Include="Assets\LandingPage\img\logo2.jpg" />
@@ -1968,6 +1969,12 @@
     <Content Include="Assets\LandingPage\img\testimonial-1.jpg" />
     <Content Include="Assets\LandingPage\img\testimonial-2.jpg" />
     <Content Include="Assets\LandingPage\img\testimonial-3.jpg" />
+    <Content Include="Assets\LandingPage\img\test_1.png" />
+    <Content Include="Assets\LandingPage\img\test_2.png" />
+    <Content Include="Assets\LandingPage\img\test_3.png" />
+    <Content Include="Assets\LandingPage\img\test_4.png" />
+    <Content Include="Assets\LandingPage\img\test_5.png" />
+    <Content Include="Assets\LandingPage\img\test_6.png" />
     <Content Include="Assets\LandingPage\img\user.jpg" />
     <Content Include="Assets\LandingPage\js\main.js" />
     <Content Include="Assets\LandingPage\lib\easing\easing.js" />
@@ -2378,6 +2385,7 @@
     <Content Include="Views\Student\DoingDeLT.cshtml" />
     <Content Include="Views\Student\PreviewDeLT.cshtml" />
     <Content Include="Views\Student\NhanKQTest.cshtml" />
+    <Content Include="Views\Home\LienHe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

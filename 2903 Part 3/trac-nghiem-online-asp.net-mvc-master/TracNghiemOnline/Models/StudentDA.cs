@@ -29,18 +29,20 @@ namespace TracNghiemOnline.Models
                                          join s in db.subjects on x.id_subject equals s.id_subject
                                          join stt in db.statuses on x.id_status equals stt.id_status
                                          where x.type == 1
+                                         orderby x.timestamps descending
                                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             return tests;
         }
 
         public List<TestViewModel> GetDeLT()
         {
-            List<TestViewModel> tests = (from x in db.tests
+            List<TestViewModel> tests2 = (from x in db.tests
                                          join s in db.subjects on x.id_subject equals s.id_subject
                                          join stt in db.statuses on x.id_status equals stt.id_status
                                          where x.type == 2
+                                         orderby x.timestamps descending
                                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
-            return tests;
+            return tests2;
         }
 
         public List<TestViewModel> GetDashboardBySubject(int id_subject1)
@@ -51,7 +53,8 @@ namespace TracNghiemOnline.Models
                 tests = (from x in db.tests
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
-                         where s.id_subject == id_subject1 && x.type == 1 
+                         where s.id_subject == id_subject1 && x.type == 1
+                         orderby x.timestamps descending
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)
@@ -70,6 +73,7 @@ namespace TracNghiemOnline.Models
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
                          where s.id_subject == id_subject1 && x.type == 2
+                         orderby x.timestamps descending
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)
@@ -90,6 +94,7 @@ namespace TracNghiemOnline.Models
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
                          where (s.id_subject == id_subject1) && (x.test_name.ToLower().Contains(name_test))  &&  ( x.type == 1 )
+                         orderby x.timestamps descending
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)
@@ -108,6 +113,7 @@ namespace TracNghiemOnline.Models
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
                          where (s.id_subject == id_subject1) && (x.test_name.ToLower().Contains(name_test)) && (x.type == 2)
+                         orderby x.timestamps descending
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)
@@ -128,7 +134,8 @@ namespace TracNghiemOnline.Models
                 tests = (from x in db.tests
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
-                         where x.test_name.ToLower().Contains(name_test) && (x.type == 1) 
+                         where x.test_name.ToLower().Contains(name_test) && (x.type == 1)
+                         orderby x.timestamps descending
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)
@@ -149,6 +156,7 @@ namespace TracNghiemOnline.Models
                          join s in db.subjects on x.id_subject equals s.id_subject
                          join stt in db.statuses on x.id_status equals stt.id_status
                          where x.test_name.ToLower().Contains(name_test) && (x.type == 2)
+                         orderby x.timestamps descending
                          select new TestViewModel { test = x, subject = s, status = stt }).ToList();
             }
             catch (Exception e1)

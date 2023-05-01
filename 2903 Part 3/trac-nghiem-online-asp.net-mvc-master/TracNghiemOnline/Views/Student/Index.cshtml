@@ -10,7 +10,40 @@
 <!DOCTYPE html>
 <html>
 <style>
-
+    body {
+        font-family: monospace;
+    }
+    .mb-2 {
+        margin-bottom: 0.5rem !important;
+    }
+    small, .small {
+        font-size: 100%;
+        font-weight: 400;
+        padding: 6px;      
+    }
+    .fa {
+        color: #17a2b8;
+    }
+    .justify-content-center {
+        justify-content: center !important;
+    }
+    .d-flex {
+        display: flex !important;
+    }
+    .btn-div {
+        margin-left: 26%;
+        border-radius: 60px;
+    }
+    .xuongdong {
+        white-space: nowrap;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .table-trangthai{
+        border: 0px;       
+    }
+   
     search-table {
         background-color: #fefcfc;
         margin: 20px 0;
@@ -33,6 +66,7 @@
         position: relative;
         display: inline-block;
         border-bottom: 1px dotted black;
+        margin-left: 20%;
     }
 
         .tooltip .tooltiptext {
@@ -45,9 +79,9 @@
             border-radius: 6px;
             padding: 5px 0; /* Position the tooltip */
             position: absolute;
-            z-index: 1;
-            bottom: -40px;
-            left: 10%;
+            z-index: 100;
+            bottom: 10px;
+            left: -20%;
         }
 
         .tooltip:hover .tooltiptext {
@@ -56,98 +90,104 @@
 </style>
 <body>
 
-        <div class="title-content"  style="display: flex">
-            <h4 style="margin: 0 20px; padding: 20px; font-family: monospace; color: #17a2b8 "> @ViewBag.Title </h4>
-            @if (TempData["status_id"] != null && (bool)TempData["status_id"])
+    <div class="title-content" style="display: flex">
+        <h4 style="margin: 0 20px; padding: 20px; font-family: monospace; color: #17a2b8 "> @ViewBag.Title </h4>
+        @if (TempData["status_id"] != null && (bool)TempData["status_id"])
+        {
+            <span class="timer success" style="margin: auto 0; text-indent: 30%; width: 1000px; ">@TempData["status"]</span> }
+        else
+        {
+            <span class="timer failed" style="margin: auto 0; text-indent: 30%; width: 1000px;">@TempData["status"]</span>}
+    </div>
+    <div>
+        @{using (Html.BeginForm("Index", "Student", FormMethod.Post))
             {
-                <span class="timer success" style="margin: auto 0; text-indent: 30%; width: 1000px; ">@TempData["status"]</span> }
-            else
-            {
-                <span class="timer failed" style="margin: auto 0; text-indent: 30%; width: 1000px;">@TempData["status"]</span>}
-        </div>
-        <div >
-         @{using (Html.BeginForm("Index", "Student", FormMethod.Post))
-         {
-             <table class="search-table" >
-                 <tr>
-                     <td width="200px" style="text-align:right"> <span> Tìm kiếm </span>  </td>
-                     <td width="300px" >
-                            <div class="dropdown-list" style="width: 300px">
-                            <select name="id_subject" id="id_subject" style="display: block" required>
-                                <option value="0" selected> Tất cả môn học </option>
-                                @foreach (var item2 in ListSubject)
-                                {
-                                    <option value="@item2.id_subject"> @item2.subject_name </option>
-                                }
-                            </select>                   
-                          </div>
-                     </td>
-                     <td width="350px">
-                         <input type="text" class="form-control" name="txtSearch" id="txtSearch" placeholder="Nhập tên bài thi cần tìm">
-                     </td>
-                     <td >
-                         <input style="margin-left: 20px; font-size: 18px" type="submit" class="btn" value="Tìm kiếm ">
-                     </td>
-                 </tr>
-             </table>
-           
-       } }
-            </div>
-   
+        <table class="search-table">
+            <tr>
+                <td width="200px" style="text-align:right"> <span> Tìm kiếm </span>  </td>
+                <td width="300px">
+                    <div class="dropdown-list" style="width: 300px">
+                        <select name="id_subject" id="id_subject" style="display: block" required>
+                            <option value="0" selected> Tất cả môn học </option>
+                            @foreach (var item2 in ListSubject)
+                            {
+                             <option value="@item2.id_subject"> @item2.subject_name </option>}
+                        </select>
+                    </div>
+                </td>
+                <td width="350px">
+                    <input type="text" class="form-control" name="txtSearch" id="txtSearch" placeholder="Nhập tên bài thi cần tìm">
+                </td>
+                <td>
+                    <input style="margin-left: 20px; font-size: 18px" type="submit" class="btn" value="Tìm kiếm ">
+                </td>
+            </tr>
+        </table> } }
+    </div>
+
+
     <div class="content row col s12 reset-margin">
         @foreach (var item in ListTest)
         {
             stt = stt + 1;
             <div class="col s6 m4 l3">
-                <div class="dashboard-inner-item" style="margin: 10px;padding: 20px;">
-                    <span class="title">Môn: <b>@item.subject.subject_name</b></span><br />
-                    <span class="title">Mã đề: <b>@item.test.test_code</b></span><br />
-                    <span class="title">Kỳ thi: <b>@item.test.test_name</b></span><br />
-                    <span class="title">Số câu hỏi: <b>@item.test.total_questions</b></span><br />
-                    <span class="title">Thời gian: <b>@item.test.time_to_do (phút)</b></span><br />
-                    <span class="title">Ghi chú: <b>@item.test.note</b></span><br />
-                    <span class="title">Trạng thái: <b>@item.status.status_name</b></span><br />
+                <div class="dashboard-inner-item" style="margin: 20px 10px;padding: 20px ;">
+                    <div class="card-body bg-light text-center p-3">
+                        <img style="width: 100%; height: 170px" class="card-img-top mb-2" src="~/Assets/LandingPage/img/test_5.png" alt="" />
+                        <h5 class="xuongdong center f-bold"> Tên đề:   @item.test.test_name  </h5>
+                      
+                        <div style="display: inline-flex">
+                            <h6 class="center mr-2" style="margin-right: 40px"> <strong> Mã đề: </strong> @item.test.test_code  </h6>
+                            <h6 class="center mr-2" > <strong>Trạng thái:</strong> @item.status.status_name  </h6>
+                        </div>
+                       
+                        <div class="d-flex justify-content-center center mb-2">
+                            <small class="mr-5"><i class="fa fa-folder"></i> @item.subject.subject_name     </small>
+                            <small class="mr-5"><i class="fa fa-file "></i> @item.test.total_questions (câu) </small>
+                            <small class="mr-5"><i class="fa fa-clock "></i> @item.test.time_to_do (Phút) </small>
+                        </div>
+                        <h6 class="xuongdong"> <strong>Ghi chú:</strong> @item.test.note  </h6>
+                    </div>
+
                     @if (item.status.id_status == 1)
                     {
                         if (Scores.IndexOf(item.test.test_code) != -1)
                         {
-                            <a class="btn full-width" href="@Url.Action("NhanKQTest/" + @item.test.test_code)">Xem kết quả </a> }
+                        <div class="btn-div"> <a class="btn btn-dangxuat" href="@Url.Action("NhanKQTest/" + @item.test.test_code)">Xem kết quả </a> </div> } 
                         else
                         {
-                            <a href="#enter-test-@item.test.test_code" class="btn full-width modal-trigger" data-code="@item.test.test_code" id="enter-ex">Làm bài</a> }
+                           <div class="btn-div"> <a href="#enter-test-@item.test.test_code" class="btn modal-trigger btn-dangxuat" data-code="@item.test.test_code" id="enter-ex">Làm bài</a> </div>
+                            }
                     }
                     else if (item.status.id_status == 2)
-                    { <div class="tooltip full-width">
-                            <a class="btn full-width" style="cursor:help"> Bài Thi Đang Khoá </a>
+                    { <div class="tooltip">
+                            <a class="btn btn-primary2 btn-dangxuat" style="cursor:help"> Bài Thi Đang Khoá </a>
                             <span class="tooltiptext"> Bạn chỉ có thể làm các bài thi ở trạng thái: Open </span>
                         </div>
 
                     }
                 </div>
-            </div> <!-- Modal Structure --> using (Html.BeginForm("CheckPassword", "Student", FormMethod.Post))
-            {
-                <div id="enter-test-@item.test.test_code" class="modal">
-                    <div class="modal-content">
-                        <h4>Nhập Mật Khẩu Đề Thi @item.test.test_code</h4>
-                        <input type="text" name="test_code" value="@item.test.test_code" hidden>
-                        <div class="input-field">
-                            <label for="email">Mật Khẩu<span class="failed">(*)</span></label>
-                            <input type="password" name="password" required>
+                </div> <!-- Modal Structure --> using (Html.BeginForm("CheckPassword", "Student", FormMethod.Post))
+                {
+                    <div id="enter-test-@item.test.test_code" class="modal">
+                        <div class="modal-content">
+                            <h4>Nhập Mật Khẩu Đề Thi @item.test.test_code</h4>
+                            <input type="text" name="test_code" value="@item.test.test_code" hidden>
+                            <div class="input-field">
+                                <label for="email">Mật Khẩu<span class="failed">(*)</span></label>
+                                <input type="password" name="password" required>
+                            </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="modal-close waves-effect waves-green btn-flat">Hủy</a>
-                        <button type="submit" class="modal-close waves-effect waves-green btn-flat">Xác nhận</button>
-                    </div>
-                </div>}
-        }
-            @{ 
-                if(stt == 0)
+                        <div class="modal-footer">
+                            <a href="#" class="modal-close waves-effect waves-green btn-flat">Hủy</a>
+                            <button type="submit" class="modal-close waves-effect waves-green btn-flat">Xác nhận</button>
+                        </div>
+                    </div>}
+                 }
+                    @{ if (stt == 0)
                 {
                     <h5 style="text-align: center; margin-left: 20px">Không tìm thấy dữ liệu bài thi nào. </h5>
-                }
-                    
-            }
+                } }
 
     </div>
     <script>

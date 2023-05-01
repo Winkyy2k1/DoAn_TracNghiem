@@ -1,6 +1,18 @@
-﻿
+﻿@using TracNghiemOnline.Common
+@using TracNghiemOnline.Models;
 @{
+    trac_nghiem_onlineEntities db = new trac_nghiem_onlineEntities();
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var ListTest = Model as List<TestViewModel>;
+    var ListSubject = ViewBag.ListSubject;
+    var Scores = ViewBag.score as List<int>;
+    var stt = 0;
+    var ListLT = (from x in db.tests
+                  join s in db.subjects on x.id_subject equals s.id_subject
+                  where x.type == 2
+                  orderby x.timestamps descending
+                  select new TestViewModel { test = x, subject = s}).ToList();
+
 }
 
 <!DOCTYPE html>
@@ -17,8 +29,15 @@
     <link href="~/Assets/LandingPage/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
     <link href="~/Assets/LandingPage/lib/lightbox/css/lightbox.min.css" rel="stylesheet" />
     <link href="~/Assets/LandingPage/css/style.css" rel="stylesheet" />
+    <style>
+        .xuongdong {
+            white-space: nowrap;
+            width: 95%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
 </head>
-
 <body>
 
     <!-- Header Start -->
@@ -53,7 +72,7 @@
                         <div class="pl-4">
                             <h4>Đề Thi Đa Dạng</h4>
                             <p class="m-0">
-                                Tổng hợp đề thi theo nhiều môn học đa dạng
+                                Tổng hợp đề thi theo nhiều môn học đa dạng. Tổng hợp đề thi theo nhiều môn...
                             </p>
                         </div>
                     </div>
@@ -127,6 +146,61 @@
         </div>
     </div>
     <!-- Facilities Start -->
+    <!-- ĐỀ THI / Bài thi  -->
+    <div class="container-fluid py-3" id="test" >
+        <div class="container p-0">
+            <div class="text-center pb-2" >
+                <h1 class="mb-4"> Đề Thi Mới Nhất </h1>
+            </div>
+            <div class="row pb-3">
+                @for (int i = 0; i < 3; i++)
+                {
+                    var item = ListTest;                   
+                    <div class="col-lg-4 mb-4">
+                        <div class="card-body bg-light text-center p-3">
+                            <img style="width: 100%; height: 200px" class="card-img-top mb-2" src="~/Assets/LandingPage/img/test_1.png" alt="" />
+                            <h4 class="xuongdong"> Tên đề: @item[i].test.test_name  </h4>
+                            <h5 class="align-items-center"> Mã đề: @item[i].test.test_code  </h5>
+                            <div class="d-flex justify-content-center mb-2">
+                                <small class="mr-3"><i class="fa fa-folder text-primary"></i> Môn: @item[i].subject.subject_name     </small>
+                                <small class="mr-3"><i class="fa fa-window-restore text-primary"></i> @item[i].test.total_questions (câu) </small>
+                                <small class="mr-3"><i class="fa fa-clock text-primary "></i> @item[i].test.time_to_do (Phút) </small>
+                            </div>
+                            <a href="" class="btn btn-primary px-4 mx-auto my-2"> Đọc thêm </a>
+                        </div>
+                    </div>
+                }
+            </div>
+            </div>
+    </div>
+    <!-- ĐỀ THI / Bài thi  -->
+    <!-- ĐỀ luyện tập  -->
+    <div class="container-fluid py-3" id="testLT">
+        <div class="container p-0">
+            <div class="text-center pb-2" >
+                <h1 class="mb-4"> Đề Luyện Tập Mới Nhất </h1>
+            </div>
+            <div class="row pb-3">
+                @for (int i = 0; i < 3; i++)
+                {
+                    var item2 = ListLT;
+                    <div class="col-lg-4 mb-4">
+                        <div class="card-body bg-light text-center p-3">
+                            <img style="width: 100%; height: 200px" class="card-img-top mb-2" src="~/Assets/LandingPage/img/test_3.png" alt="" />
+                            <h4 class="xuongdong"> Tên đề: @item2[i].test.test_name </h4>
+                            <div class="d-flex justify-content-center mb-2">
+                                <small class="mr-3"><i class="fa fa-folder text-primary"></i>Môn: @item2[i].subject.subject_name     </small>
+                                <small class="mr-3"><i class="fa fa-window-restore text-primary"></i> @item2[i].test.total_questions (câu) (câu) </small>
+                                <small class="mr-3"><i class="fa fa-clock text-primary "></i> @item2[i].test.time_to_do (Phút) </small>
+                            </div>
+                            @*<a href="" class="btn btn-primary px-4 mx-auto my-2"> Đọc thêm </a>*@
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <!-- ĐỀ luyện tập -->
     <!-- About Start -->
     <div class="container-fluid py-5">
         <div class="container">

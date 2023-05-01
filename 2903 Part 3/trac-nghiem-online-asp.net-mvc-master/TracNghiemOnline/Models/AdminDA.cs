@@ -653,6 +653,7 @@ namespace TracNghiemOnline.Models
             test.type = 1; // 1 Đề thi. 2 Đề luyện tập. 
             test.total_questions = total_question;
             test.time_to_do = time_to_do;
+            test.timestamps = DateTime.Now;   // thoi gian tao de thi
             test.note = note;
             try
             {
@@ -679,6 +680,7 @@ namespace TracNghiemOnline.Models
             test.type = 2; // 1 Đề thi. 2 Đề luyện tập. 
             test.total_questions = total_question;
             test.time_to_do = time_to_do;
+            test.timestamps = DateTime.Now;   // thoi gian tao de thi
             test.note = note;
             try
             {
