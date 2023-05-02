@@ -1,91 +1,108 @@
 ﻿@using TracNghiemOnline.Models
-@{
-    ViewBag.Title = "Danh sách đề thi";
+@{ ViewBag.Title = "Danh sách đề thi";
     Layout = "~/Views/Shared/_LayoutTestTeacher.cshtml";
 
     var ListSubject = ViewBag.ListSubject;
-    var ListTest = Model as List<TestViewModel>;   
+    var ListTest = Model as List<TestViewModel>;
     var stt = 0;
-}
-
-<header>
+    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link href="~/Assets/css/test.css" rel="stylesheet" />
     <style>
+
         .search-table {
-            background-color: #fefcfc;           
+            background-color: #fefcfc;
         }
+
             .search-table td {
                 padding: 0 20px;
                 height: 80px;
                 font-size: 18px;
             }
 
-        #txtSearch{
+        #txtSearch {
             font-size: 18px;
             color: black;
         }
+
         ::placeholder {
             color: #191717;
         }
     </style>
-</header>
+</head>
 
-<div class="title-content">
-    <h4 style="margin:0 20px; padding: 20px"> @ViewBag.Title </h4>
-</div>
-<div class="content row col s6 reset-margin">
-     @{using (Html.BeginForm("Index", "Teacher", FormMethod.Post))
-         {
-             <table class="search-table">
-                 <tr>
-                     <td width="200px" style="text-align:right"> <span> Tìm kiếm </span>  </td>
-                     <td width="300px" >
-                            <div class="dropdown-list" style="width: 300px">
-                            <select name="id_subject" id="id_subject" style="display: block" required>
-                                <option value="0" selected> Tất cả môn học </option>
-                                @foreach (var item2 in ListSubject)
-                                {
-                                    <option value="@item2.id_subject"> @item2.subject_name </option>
-                                }
-                            </select>                   
-                          </div>
-                     </td>
-                     <td width="350px">
-                         <input type="text" class="form-control" name="txtSearch" id="txtSearch" placeholder="Nhập tên bài thi cần tìm">
-                     </td>
-                     <td >
-                         <input style="margin-left: 20px; font-size: 18px" type="submit" class="btn" value="Tìm kiếm ">
-                     </td>
-                 </tr>
-             </table>
-           
-       } }
+     
+<body class="body-login scrollbar" >
 
-            @foreach (var item in ListTest)
+    <div class="title-content">
+        <h4 style="margin:0 20px; padding: 20px"> @ViewBag.Title </h4>
+    </div>
+
+    <div class="content row col s6 reset-margin">
+        @{using (Html.BeginForm("Index", "Teacher", FormMethod.Post))
             {
-                stt = stt + 1;
-                <div class="col s6 m6 l3">
-                    <div class="dashboard-inner-item" style="margin: 10px;padding: 20px">
-                        <span class="title">Môn: <b>@item.subject.subject_name</b></span><br />
-                        <span class="title">Mã đề: <b>@item.test.test_code</b></span><br />
-                        <span class="title">Bài thi: <b>@item.test.test_name</b></span><br />
-                        <span class="title">Số câu hỏi: <b>@item.test.total_questions</b></span><br />
-                        <span class="title">Thời gian: <b>@item.test.time_to_do (phút)</b></span><br />
-                        <span class="title">Ghi chú: <b>@item.test.note</b></span><br />
-                        <span class="title">Trạng thái: <b>@item.status.status_name</b></span><br />
-                        <a class="btn full-width" href="@Url.Action("Preview/" + @item.test.test_code)">Xem chi tiết  </a>
-
+        <table class="search-table">
+            <tr>
+                <td width="200px" style="text-align:right"> <span> Tìm kiếm </span>  </td>
+                <td width="300px">
+                    <div class="dropdown-list" style="width: 300px">
+                        <select name="id_subject" id="id_subject" style="display: block" required>
+                            <option value="0" selected> Tất cả môn học </option>
+                            @foreach (var item2 in ListSubject)
+                            {
+                                <option value="@item2.id_subject"> @item2.subject_name </option>}
+                        </select>
                     </div>
-                </div>
-            }
-            @{ 
-                if(stt == 0)
-                {
-                    <h5 style="text-align: center; margin-left: 20px">Không tìm thấy dữ liệu bài thi nào. </h5>
-                }
-                    
-            }
-        
-</div>
+                </td>
+                <td width="350px">
+                    <input type="text" class="form-control" name="txtSearch" id="txtSearch" placeholder="Nhập tên bài thi cần tìm">
+                </td>
+                <td>
+                    <input style="margin-left: 20px; font-size: 18px" type="submit" class="btn" value="Tìm kiếm ">
+                </td>
+            </tr>
+        </table> } }
 
-<script>
-</script>
+        <div class="container-fluid py-3" id="test">
+            <div class="container p-0">
+            <div class="row pb-3">
+                    @foreach (var item in ListTest)
+                    {
+                        stt = stt + 1;
+
+                        <div class="col-lg-4 mb-4">
+                            <div class="card-body bg-light text-center p-4">
+                                <img style="width: 100%; height: 200px" class="card-img-top mb-2" src="~/Assets/LandingPage/img/test_5.png" alt="" />
+                                <h4 class="xuongdong"> Đề thi: @item.test.test_name </h4>
+                                <div style="display: inline-flex">
+                                    <h6 class="center mr-2" style="margin-right: 40px"> <strong> Mã đề: </strong> @item.test.test_code  </h6>
+                                    <h6 class="center mr-2"> <strong>Trạng thái:</strong> @item.status.status_name  </h6>
+                                </div>
+                                <div class="d-flex justify-content-center mb-2">
+                                    <small class="mr-3"><i class="fa fa-folder text-primary"></i>Môn: @item.subject.subject_name     </small>
+                                    <small class="mr-3"><i class="fa fa-window-restore text-primary"></i> @item.test.total_questions (câu) </small>
+                                    <small class="mr-3"><i class="fa fa-clock text-primary "></i> @item.test.time_to_do (Phút) </small>
+                                </div>
+                                <h6 class="xuongdong"> <strong>Ghi chú:</strong> @item.test.note  </h6>
+                                <a class="btn btn-primary px-4 mx-auto my-2" href="@Url.Action("Preview/" + @item.test.test_code)">Xem chi tiết  </a>
+                              
+                            </div>
+                        </div>
+
+                    }
+                    @{ if (stt == 0)
+                        {
+                        <h4 style="text-align: center; margin-left: 30%">Không tìm thấy dữ liệu bài thi nào. </h4> }
+                }
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script>
+    </script>
+</body>
+</html>

@@ -1933,6 +1933,7 @@
     <Content Include="Assets\css\materialize.min.css" />
     <Content Include="Assets\css\normalize.css" />
     <Content Include="Assets\css\style.min.css" />
+    <Content Include="Assets\css\test.css" />
     <Content Include="Assets\DataTables\css\jquery.dataTables.css" />
     <Content Include="Assets\DataTables\images\sort_asc.png" />
     <Content Include="Assets\DataTables\images\sort_asc_disabled.png" />
@@ -2386,6 +2387,8 @@
     <Content Include="Views\Student\PreviewDeLT.cshtml" />
     <Content Include="Views\Student\NhanKQTest.cshtml" />
     <Content Include="Views\Home\LienHe.cshtml" />
+    <Content Include="Views\Student\Index - Copy.cshtml" />
+    <Content Include="Views\Student\DeLT_Student - Copy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

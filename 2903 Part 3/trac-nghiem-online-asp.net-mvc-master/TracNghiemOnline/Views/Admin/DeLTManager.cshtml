@@ -27,7 +27,7 @@
                     <th>STT</th>
                     <th>Tên đề luyện tập</th>
                     <th>Mã Đề</th>
-                    <th> Mật khẩu đề </th>
+                   
                     <th>Môn học </th>
                     <th>Thông Tin Đề </th>
                     <th>Trạng Thái</th>
@@ -48,12 +48,12 @@
                     <td style="text-align: left; z-index: 20px" >@item.test.test_name</td>
                     <td>@item.test.test_code</td>
                    
-                    <td>
+                    @*<td>
                          @{ 
                             pass = item.test.password;
                              @TracNghiemOnline.Common.Encryptor.DecodeFrom64(pass);
                     }
-                    </td>
+                    </td>*@
 
                      <td>@item.subject.subject_name</td>
                     <td style="text-align: left; z-index: 10px"> Số câu hỏi: @item.test.total_questions<br /> Thời gian làm: @item.test.time_to_do phút <br /> Ghi chú: @item.test.note</td>
@@ -87,8 +87,7 @@
                     <input type="text" id="test_name" name="test_name" required>
                 </div>
                 <div class="input-field">
-                    <label for="email">Mật khẩu<span class="failed">(*)</span></label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" value="123456" hidden>
                 </div>
                  <div class="input-field">
                         <select name="id_grade" id="id_grade" required>
@@ -152,23 +151,33 @@
         }
     });
     $('select').select();
+
     function get_units(id) {
         var list = $('#list-unit');
+        var id_grade = $('#id_grade').val();
         list.empty();
-        var url = "/Admin/GetJsonUnits/"+ id;
-        var success = function (result) {
-            if (result.length <= 0) {
-                var item = '<div class="input-field"><input type="text" disabled value="Môn này hiện chưa có câu hỏi nào"></div>';
-                list.append(item);
-            } else {
-                for (i = 0; i < result.length; i++) {
-                    var item = '<div class="input-field"><label for="unit-' + result[i].Unit + '">Nhập số câu hỏi chương ' + result[i].Unit + ' (có ' + result[i].Total + ' câu) <span class="failed">(*)</span></label><input type="number" max="' + result[i].Total + '" class="unit_input" onchange="set_sum(' + result[i].Total + ')"  name="unit-' + result[i].Unit + '" id="unit-' + result[i].Unit + '" required></div>';
+        if (id_grade > 0) {
+
+            var url = "/Admin/GetJsonUnits?id=" + id + "&id_grade=" + id_grade;
+            var success = function (result) {
+
+                if (result.length <= 0) {
+                    var item = '<div class="input-field"><input type="text" disabled value="Môn này hiện chưa có câu hỏi nào"></div>';
                     list.append(item);
+                } else {
+                    for (i = 0; i < result.length; i++) {
+                        var item = '<div class="input-field"><label for="unit-' + result[i].Unit + '">Nhập số câu hỏi chương ' + result[i].Unit + ' (có ' + result[i].Total + ' câu) <span class="failed">(*)</span></label><input type="number" max="' +
+                            result[i].Total + '" class="unit_input" onchange="set_sum(' + result[i].Total + ')"  name="unit-' + result[i].Unit + '" id="unit-' + result[i].Unit + '" required></div>';
+                        list.append(item);
+                    }
                 }
-            }
-        };
-        $.get(url, success);
+
+            };
+            $.get(url, success);
+        }
+        else { alert("Bạn cần thực hiện chọn Khối học trước."); }
     }
+
     function set_sum(total) {
         var sum = 0;
         $('.unit_input').each(function () {
