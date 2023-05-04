@@ -367,3 +367,12 @@ h1, h2, h3, h4, h5, h6 {
 .d-flex {
     display: flex !important;
 }
+
+.mx-auto {
+    margin-right: auto !important;
+}
+
+
+.mx-auto {
+    margin-left: auto !important;
+}

@@ -10695,3 +10695,36 @@ a.text-dark:hover, a.text-dark:focus {
     background-color: #c9cded;
     border-radius: 10px
 }
+
+.fa-sum{
+    font-size: 40px;
+}
+
+.fa-chua-dat {
+    font-size: 40px;
+}
+
+.fa-da-dat{
+    font-size: 40px;
+}
+
+.tong-quan-item {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 0 10px #e7e7e7;
+    overflow: hidden;
+}
+
+.report-number {
+    font-size: 30px;
+    color: #00394f;
+}
+
+.report-label {
+    color: black;
+    font-size: 17px;
+    font-weight: 900;
+}
+.report-info{
+    left: -10px;
+}

@@ -12,6 +12,9 @@
         @ViewBag.Title
     </title>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/Assets/css/normalize.css">
     <link rel="stylesheet" href="~/Assets/css/style.min.css">
@@ -56,9 +59,10 @@
 
         .text-pri {
             color: #17a2b8;
-            font-size: 2.5rem;            
+            font-size: 2.5rem;
             font-weight: bold;
         }
+
         .text-white {
             color: white;
         }
@@ -75,33 +79,43 @@
         <a href="/Home/Index" class="nav-item1"> Trang chủ</a>
         <a href="/Home/About" class="nav-item1"> Thông tin </a>
         <a href="/Student/Index" class="nav-item1"> Đề thi </a> 
-        <a href="/Student/DeLT_Student" class="nav-item1"> Ôn luyện </a>
-       
+        <a href="/Student/DeLT_Student" class="nav-item1"> Ôn luyện </a> 
+        <a href="/Student/ThongKeHT" class="nav-item1"> Thống kê </a> 
+        @*<div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"> Tổng hợp </a>
+            <div class="dropdown-menu rounded-0 m-0">
+                <a href="blog.html" class="dropdown-item"> Tổng kết học tập </a>
+                <a href="single.html" class="dropdown-item"> Tổng hợp kết quả thi </a>
+                <a href="single.html" class="dropdown-item"> Tổng hợp đề luyện tập </a>
+            </div>
+        </div>*@
         <a href="/Home/LienHe" class="nav-item1"> Liên hệ </a>
     </div>   
     <div class="navbar-nav1" style="margin: auto 50px">
-    @{ if (@Session[UserSession.NAME] == null)
-        { <a href="/Login/Index" class="btn btn-primary px-4"> Đăng nhập &#10152;</a> }
-                else
-             {
+        @{ if (@Session[UserSession.NAME] == null)
             {
-                int role = (int)Session[UserSession.PERMISSION];
-                if (role == 1)
-                {                  
-                    <span class="title_test" >Xin chào: @Session[UserSession.NAME] </span>
-                    <a href="/Admin/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
-                    else
-                    if (role == 2)
-                    {                      
-                        <span class="title" style="color: black; margin: 10px 30px">Xin chào: @Session[UserSession.NAME] </span>
-                        <a href="/Teacher/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
-                    else
-                    if (role == 3)
-                    {                       
+                <a href="/Login/Index" class="btn btn-primary px-4"> Đăng nhập &#10152;</a>
+                    }
+                                else
+                                {
+                                    {
+                                        int role = (int)Session[UserSession.PERMISSION];
+                                        if (role == 1)
+                                        {
+                    <span class="title_test">Xin chào: @Session[UserSession.NAME] </span>
+                                            <a href="/Admin/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
+                                        else
+                                                                if (role == 2)
+                                        {
                     <span class="title" style="color: black; margin: 10px 30px">Xin chào: @Session[UserSession.NAME] </span>
-                    <a href="/Student/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
-                        }
-            } }
+                                            <a href="/Teacher/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
+                                        else
+                                                                if (role == 3)
+                                        {
+                    <span class="title" style="color: black; margin: 10px 30px">Xin chào: @Session[UserSession.NAME] </span>
+                                            <a href="/Student/Logout" class="btn btn-dangxuat"> <i class="fa fa-power-off"></i>  Đăng Xuất  </a> }
+                                    }
+                                } }
     </div>
 
 </header>
@@ -116,7 +130,7 @@
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-white mt-5 py-5 px-sm-3 px-md-5" id="footer_test">
         <div class="row pt-5" id="footer_row">
-            <div class="col-lg-3 col-md-6 mb-5" style="flex: 0 0 30%; max-width: 30%; margin-left: 50px">
+            <div class="col-lg-3 col-md-6 mb-5" style="flex: 0 0 25%; max-width: 250%; margin-left: 150px">
                 <h3 class="text-pri mb-4"> KidKinder </h3>
                 <p style="display: block; font-style:normal;line-height: 45px ">
                     Labore dolor amet ipsum ea, erat sit ipsum duo eos. Volup amet ea

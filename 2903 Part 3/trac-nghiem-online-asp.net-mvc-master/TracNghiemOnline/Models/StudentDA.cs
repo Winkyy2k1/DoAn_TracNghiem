@@ -292,6 +292,8 @@ namespace TracNghiemOnline.Models
             db.SaveChanges();
         }
 
+        
+
         public void InsertScoreDELT(double score, string detail)
         {
             var s = new score();
@@ -343,5 +345,98 @@ namespace TracNghiemOnline.Models
             }
             return score;
         }
+
+        public List<ScoreViewModel> GetScore_ByID(int id_stu)
+        {
+            List<ScoreViewModel> score = new List<ScoreViewModel>();
+            try
+            {
+                score = (from x in db.scores
+                         where x.type == 1 && x.id_student == id_stu
+                         select new ScoreViewModel { score = x }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return score;
+        }
+        public List<ScoreViewModel> GetScoreLT_ByID(int id_stu)
+        {
+            List<ScoreViewModel> score = new List<ScoreViewModel>();
+            try
+            {
+                score = (from x in db.scores
+                         where x.type == 2 && x.id_student == id_stu
+                         select new ScoreViewModel { score = x }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return score;
+        }
+        public List<ScoreViewModel> GetScorePass_ByID(int id_stu)
+        {
+            List<ScoreViewModel> score = new List<ScoreViewModel>();
+            try
+            {
+                score = (from x in db.scores
+                         where x.type == 1 && x.id_student == id_stu && x.score_number >=5
+                         select new ScoreViewModel { score = x }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return score;
+        }
+        public List<ScoreViewModel> GetScorePassLT_ByID(int id_stu)
+        {
+            List<ScoreViewModel> score = new List<ScoreViewModel>();
+            try
+            {
+                score = (from x in db.scores
+                         where x.type == 2 && x.id_student == id_stu && x.score_number >= 5
+                         select new ScoreViewModel { score = x }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return score;
+        }
+
+        public List<ScoreViewModel> GetScoreFail_ByID(int id_stu)
+        {
+            List<ScoreViewModel> score = new List<ScoreViewModel>();
+            try
+            {
+                score = (from x in db.scores
+                         where x.type == 1 && x.id_student == id_stu && x.score_number < 5
+                         select new ScoreViewModel { score = x }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return score;
+        }
+        public List<ScoreViewModel> GetScoreFailLT_ByID(int id_stu)
+        {
+            List<ScoreViewModel> score = new List<ScoreViewModel>();
+            try
+            {
+                score = (from x in db.scores
+                         where x.type == 2 && x.id_student == id_stu && x.score_number < 5
+                         select new ScoreViewModel { score = x }).ToList();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return score;
+        }
+
     }
 }

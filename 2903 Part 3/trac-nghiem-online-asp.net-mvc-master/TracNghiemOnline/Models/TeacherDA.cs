@@ -180,6 +180,20 @@ namespace TracNghiemOnline.Models
             return tests;
         }
 
+        public test GetTest(int test_code)
+        {
+            test test = new test();
+            try
+            {
+                test = db.tests.SingleOrDefault(x => x.test_code == test_code);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return test;
+        }
+        
         public List<ScoreViewModel> GetListScore(int test_code)
         {
             List<ScoreViewModel> score = new List<ScoreViewModel>();

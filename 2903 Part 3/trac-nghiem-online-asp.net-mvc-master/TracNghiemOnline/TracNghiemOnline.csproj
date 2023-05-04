@@ -2389,6 +2389,7 @@
     <Content Include="Views\Home\LienHe.cshtml" />
     <Content Include="Views\Student\Index - Copy.cshtml" />
     <Content Include="Views\Student\DeLT_Student - Copy.cshtml" />
+    <Content Include="Views\Student\ThongKeHT.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

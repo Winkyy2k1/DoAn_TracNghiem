@@ -99,9 +99,13 @@ namespace TracNghiemOnline.Controllers
                 return View("Error");
             var list = Model.GetListScore(id);
             ViewBag.test_code = id;
+            string test_password = Model.GetTest(id).password;            
+            ViewBag.password = Encryptor.DecodeFrom64(test_password)  ;
             ViewBag.total = list.Count;
             return View(list);
         }
+
+
         public ActionResult Logout()
         {
             if (!user.IsTeacher())

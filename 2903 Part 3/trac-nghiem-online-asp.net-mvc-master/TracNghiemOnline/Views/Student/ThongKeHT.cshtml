@@ -1,0 +1,154 @@
+﻿@using TracNghiemOnline.Models
+@{
+    ViewBag.Title = "ThongKeHT";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var List = Model as List<ScoreViewModel>;
+    // Đề THi 
+    var sum = ViewBag.sum_test;
+    var pass = ViewBag.pass_test;
+    var fail = ViewBag.fail_test;
+    // Đề Luyện tập 
+    var sumLT = ViewBag.sum_testLT;
+    var passLT = ViewBag.pass_testLT;
+    var failLT = ViewBag.fail_testLT;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Handlee&family=Nunito&display=swap" rel="stylesheet" />
+
+</head>
+
+<body>
+    <!-- Detail Start -->
+    <div class="container">
+
+        <div class="row pt-5">
+            <div class="col-lg-4 mt-5 mt-lg-0">
+                <div class="mb-5">
+                    <h2 class="mb-4">Thống kê </h2>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <a href="#tktest"> Thống kê thi cử </a>
+                            <span class="badge badge-primary badge-pill">  @sum   </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                            <a href="#tktestLT"> Thống kê luyện tập </a>
+                            <span class="badge badge-primary badge-pill">  @sumLT </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="d-flex flex-column text-left mb-3">
+                    <p class="section-title pr-5">
+                        <span class="pr-2" id="tktest"> Bài Thi </span>
+                    </p>
+                    <h1 class="mb-3"> Thống kê kết quả các bài thi  </h1>
+                </div>
+                <div>
+                    <div class="mb-5">
+                        <div class="row mt-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="tong-quan-item report-item d-flex align-items-center">
+                                    <div class="p-3">
+                                        <i class="fa fa-tasks text-primary fa-sum"></i>
+                                    </div>
+                                    <div class="report-info p-3">
+                                        <div class="report-label">Bài thi đã làm</div>
+                                        <div class="report-number"> @sum  </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="tong-quan-item report-item d-flex align-items-center">
+                                    <div class="p-3">
+                                        <i class="fa fa-check-square text-success fa-da-dat"></i>
+                                    </div>
+                                    <div class="report-info p-3">
+                                        <div class="report-label">Số bài đạt </div>
+                                        <div class="report-number"> @pass </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="tong-quan-item report-item d-flex align-items-center">
+                                    <div class="p-3">
+                                        <i class="fa fa-window-close text-danger fa-chua-dat "></i>
+                                    </div>
+                                    <div class="report-info p-3">
+                                        <div class="report-label">Số bài chưa đạt</div>
+                                        <div class="report-number"> @fail </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                @*.. ĐỀ LUYỆN TẬP THỐNG KÊ   .*@
+
+                <div class="d-flex flex-column text-left mb-3">
+                    <p class="section-title pr-5">
+                        <span class="pr-2" id="tktestLT"> bài Luyện tập </span>
+                    </p>
+                    <h1 class="mb-3"> Thống kê kết quả các bài luyện tập  </h1>
+                </div>
+                <div>
+                    <div class="mb-5">
+                        <div class="row mt-4">
+                            <div class="col-md-4 mb-3">
+                                <div class="tong-quan-item report-item d-flex align-items-center">
+                                    <div class="p-3">
+                                        <i class="fa fa-tasks text-primary fa-sum"></i>
+                                    </div>
+                                    <div class="report-info p-3">
+                                        <div class="report-label">Bài thi đã làm</div>
+                                        <div class="report-number">  @sumLT  </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="tong-quan-item report-item d-flex align-items-center">
+                                    <div class="p-3">
+                                        <i class="fa fa-check-square text-success fa-da-dat"></i>
+                                    </div>
+                                    <div class="report-info p-3">
+                                        <div class="report-label">Số bài đạt </div>
+                                        <div class="report-number"> @passLT </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="tong-quan-item report-item d-flex align-items-center">
+                                    <div class="p-3">
+                                        <i class="fa fa-window-close text-danger fa-chua-dat "></i>
+                                    </div>
+                                    <div class="report-info p-3">
+                                        <div class="report-label">Số bài chưa đạt</div>
+                                        <div class="report-number"> @failLT  </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Detail End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary p-3 back-to-top">
+        <i class="fa fa-angle-double-up"></i>
+    </a>
+
+
+</body>
+</html>
+
+

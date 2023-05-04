@@ -272,6 +272,32 @@ namespace TracNghiemOnline.Controllers
             Model.UpdateStudentTest(id_quest, answer);
             Model.UpdateTiming(time);
         }
+
+        public ActionResult ThongKeHT()
+        {
+            if (!user.IsStudent())
+                return View("Error");
+            // đề thi
+            var list_sum = Model.GetScore_ByID(user.ID);
+            ViewBag.sum_test = list_sum.Count;
+            var list_pass = Model.GetScorePass_ByID(user.ID);
+            ViewBag.pass_test = list_pass.Count;
+            var list_fail = Model.GetScoreFail_ByID(user.ID);
+            ViewBag.fail_test = list_fail.Count;
+
+            //đề Luyện tập 
+
+            var list_sum_LT = Model.GetScoreLT_ByID(user.ID);
+            ViewBag.sum_testLT = list_sum_LT.Count;
+            var list_pass_LT = Model.GetScorePassLT_ByID(user.ID);
+            ViewBag.pass_testLT = list_pass_LT.Count;
+            var list_fail_LT = Model.GetScoreFailLT_ByID(user.ID);
+            ViewBag.fail_testLT = list_fail_LT.Count;
+
+
+            return View(list_sum);
+        }
+
         public ActionResult Logout()
         {
             if (!user.IsStudent())

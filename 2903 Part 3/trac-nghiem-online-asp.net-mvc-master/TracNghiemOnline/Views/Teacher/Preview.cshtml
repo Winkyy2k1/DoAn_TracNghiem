@@ -1,16 +1,24 @@
 ﻿@using TracNghiemOnline.Models
 @{
-    ViewBag.Title = "Danh Sách Điểm Học Sinh của Bài Thi Mã đề: " + ViewBag.test_code + " (" + ViewBag.total + ")";  
+    ViewBag.Title = "Danh Sách Điểm Học Sinh của Bài Thi Mã đề: " + ViewBag.test_code + " (" + ViewBag.total + ")";
     Layout = "~/Views/Shared/_LayoutTestTeacher.cshtml";
     var List = Model as List<ScoreViewModel>;
-    
+    var pass = ViewBag.password;
     int stt = 0;
 }
+<style>
+    .pass-preview{
+        height: 50px;
+        color: cornflowerblue;
+    }
 
+</style>
 <div class="title-content">
-    <span class="title">@ViewBag.Title</span>
+    <span class="title">@ViewBag.Title</span>   
 </div>
-
+<div class="pass-preview">
+    <h5 class=" center" style="padding: 0 auto"> Mật khẩu đề thi là: @pass </h5>
+</div>
 <div class="content row col s12">
    
     <table class="striped centered" id="list-score">
