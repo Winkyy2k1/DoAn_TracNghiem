@@ -2387,8 +2387,6 @@
     <Content Include="Views\Student\PreviewDeLT.cshtml" />
     <Content Include="Views\Student\NhanKQTest.cshtml" />
     <Content Include="Views\Home\LienHe.cshtml" />
-    <Content Include="Views\Student\Index - Copy.cshtml" />
-    <Content Include="Views\Student\DeLT_Student - Copy.cshtml" />
     <Content Include="Views\Student\ThongKeHT.cshtml" />
   </ItemGroup>
   <ItemGroup>
